@@ -1,0 +1,247 @@
+{
+  "Donation" : [
+    {
+      "name": "애니휴먼",
+      "url": "https://anyhuman.co.kr/",
+      "tags": ["기부"]
+    },
+    {
+      "name": "희움",
+      "url": "http://joinheeum.com/",
+      "tags": ["기부"]
+    },
+    {
+      "name": "마리몬드",
+      "url": "https://marymond.kr/main/index",
+      "tags": ["기부"]
+    },
+    {
+      "name": "마르코로호",
+      "url": "https://www.marcoroho.com/",
+      "tags": ["기부"]
+    },
+    {
+      "name": "위드아이스",
+      "url": "https://withice.or.kr/",
+      "tags": ["기부"]
+    },
+    {
+      "name": "메리디아니",
+      "url": "https://smartstore.naver.com/meridiani",
+      "tags": ["기부"]
+    },
+    {
+      "name": "비프렌더스인터내셔널",
+      "url": "http://www.befriendmarket.com/index.html",
+      "tags": ["기부"]
+    },
+    {
+      "name": "비코",
+      "url": "http://www.bcoe.co.kr/",
+      "tags": ["기부"]
+    }
+  ],
+  "FairTrading": [
+    {
+      "name": "FairTradeKorea",
+      "url": "https://fairtradekorea.co.kr/",
+      "tags": ["공정무역"]
+    },
+    {
+      "name": "울림",
+      "url": "https://ullimft.com/",
+      "tags": ["공정무역"]
+    },
+    {
+      "name": "뷰티풀마켓",
+      "url": "https://www.beautifulmarket.org/service/company.php",
+      "tags": ["공정무역"]
+    },
+    {
+      "name": "BuyFairTrade",
+      "url": "https://www.buyfairtrade.co.kr/",
+      "tags": ["공정무역"]
+    },
+    {
+      "name": "아름다운커피",
+      "url": "https://www.beautifulcoffee.com/index.html?ref=smartphone",
+      "tags": ["공정무역"]
+    },
+    {
+      "name": "AFN(아시아공정무역네트워크)",
+      "url": "http://asiafairtrade.net/",
+      "tags": ["공정무역"]
+    },
+    {
+      "name": "행복한나눔",
+      "url": "www.sharinghappiness.or.kr",
+      "tags": ["공정무역"]
+    },
+    {
+      "name": "피스커피",
+      "url": "www.peacecoffee.co.kr",
+      "tags": ["공정무역"]
+    }
+  ],
+  "Vegan": [
+    {
+      "name": "베지푸드",
+      "url": "http://www.vegefood.co.kr/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "러빙헛",
+      "url": "http://m.lovinghut.co.kr/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "채식나라",
+      "url": "http://www.chaesiknara.co.kr/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "베지맘",
+      "url": "http://vegemom.kr/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "비건스페이스",
+      "url": "https://veganspace.co.kr/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "진선푸드",
+      "url": "http://jinsunfood.com/index.html",
+      "tags": ["비건"]
+    },
+    {
+      "name": "채식한끼몰",
+      "url": "https://www.hanggi.kr/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "비건푸드",
+      "url": "https://vegan.modoo.at/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "보나쥬르",
+      "url": "https://m.bonajour.com/index.html#enp_mbris",
+      "tags": ["비건"]
+    },
+    {
+      "name": "화이트랩스",
+      "url": "http://beauti-science.com/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "멜릭서",
+      "url": "https://m.kr.melixirskincare.com/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "프록시엘",
+      "url": "https://m.proxyl.co.kr/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "케빈머피",
+      "url": "https://m.kevinmurphy.co.kr/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "VEGEA",
+      "url": "https://www.vegeacompany.com/",
+      "tags": ["비건"]
+    },
+    {
+      "name": "붐베이직",
+      "url": "https://m.boombasic.co.kr/",
+      "tags": ["비건"]
+    }
+  ],
+  "ZeroWaste" : [
+    {
+      "name": "서울새활용스토어",
+      "url": "http://seoulupstore.com/",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "119레오",
+      "url": "http://www.119reo.com/",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "코끼리별꽃",
+      "url": "http://greenkokkiri.co.kr/",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "리컵키트",
+      "url": "https://mondomio.net/product/list.html?cate_no=42&gclid=CjwKCAjw3_KIBhA2EiwAaAAlinf6qN_wgdkrya-reGVDqvqTCzNNhUm8Zn6Pf_9QyPkCMmC3uUvDwhoCEu8QAvD_BwE",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "FREITAG",
+      "url": "https://www.freitag.ch/en",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "큐클리프",
+      "url": "https://cueclyp.com/",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "Ul:Kin",
+      "url": "https://ulkin.co.kr/",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "컷더트래쉬",
+      "url": "https://www.instagram.com/cutthetrash_kr/",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "세이플래닛",
+      "url": "https://safeplanet.modoo.at/?link=81e6qtat",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "오버랩",
+      "url": "https://www.overlab.kr/",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "클레시드라",
+      "url": "https://clessidra.modoo.at/",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "H22",
+      "url": "https://tumblbug.com/wemakeh22",
+      "tags": ["제로웨이스트", "업사이클링"]
+    },
+    {
+      "name": "아로마티카",
+      "url": "https://aromatica.co.kr/",
+      "tags": ["제로웨이스트", "플라스틱 프리"]
+    },
+    {
+      "name": "네추럴팁스",
+      "url": "https://aromatica.co.kr/",
+      "tags": ["제로웨이스트", "플라스틱 프리"]
+    },
+    {
+      "name": "쎄비보타닉",
+      "url": "https://savvybotanic.com/",
+      "tags": ["제로웨이스트", "플라스틱 프리"]
+    }
+  ],
+  "AnimalWelfare": [
+    {
+      "name": "바로란",
+      "url": "https://barolan.com/",
+      "tags": ["동물복지"]
+    }
+  ]
+}
