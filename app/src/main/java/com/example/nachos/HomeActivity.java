@@ -1,15 +1,21 @@
 package com.example.nachos;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.res.AssetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import java.util.ArrayList;
 
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +35,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import static android.view.inputmethod.EditorInfo.*;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -92,6 +100,7 @@ public class HomeActivity extends AppCompatActivity {
         hash_do = findViewById(R.id.hash41);
         hash_aw = findViewById(R.id.hash51);
         hash_pf = findViewById(R.id.hash61);
+
 
         // 상단 탑뷰 클릭 시 이벤트
         home.setOnClickListener(new View.OnClickListener() {
@@ -207,16 +216,50 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.setPageMargin(margin/2);
 
         viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
+        //keyword.setImeOptions(IME_ACTION_GO);
+
+        keyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+            {
+                switch (actionId) {
+                    case IME_ACTION_GO:
+
+                        insertKeyword();
+                        init(meaningOutKeywordList); // 버튼 누르면 init()호출
+                        hideKeyboard();
+                        // 검색 동작
+                        break;
+                    default:
+                        // 기본 엔터키 동작
+                        return false;
+                }
+                return true;
+            }
+        });
+
 
         add_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 insertKeyword();
                 init(meaningOutKeywordList); // 버튼 누르면 init()호출
+                hideKeyboard();
             }
+
+
+
         });
 
+
+
+
+
+
+
     }
+
+
+
 
     private void init(ArrayList<String> itemList) {
 
@@ -240,6 +283,19 @@ public class HomeActivity extends AppCompatActivity {
     };
 
 
+
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        keyword.setText(null);
+
+    }
 
     public void initializeData() //이미지를 저장함 배열에
     {

@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="70dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="7dp"
         android:background="#ffffff"
         >
 
@@ -284,6 +284,8 @@
                     android:textColor="#3E3E3E"
                     android:textSize="15dp"
                     android:textStyle="normal"
+                    android:singleLine="true"
+                    android:imeOptions="actionGo"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text61"
                     tools:ignore="MissingConstraints" />
@@ -351,14 +353,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemBackground="@android:color/white"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bottomnavigationview"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

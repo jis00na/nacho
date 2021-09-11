@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import java.util.ArrayList;
 
+import static android.net.wifi.p2p.nsd.WifiP2pServiceRequest.newInstance;
+
 class ViewPagerAdapter extends PagerAdapter {
     private Context mContext;
     private ArrayList<Integer> imageList;
@@ -30,10 +32,12 @@ class ViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.subpage, null);
-
+        position= position % 7;
         ImageView imageView = view.findViewById(R.id.imageView);
         imageView.setImageResource(imageList.get(position));
 
+
+        //imageList.get(position);
         container.addView(view);
 
         return view;
@@ -41,7 +45,7 @@ class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return imageList.size();
+        return Integer.MAX_VALUE;
     }
 
     @Override
