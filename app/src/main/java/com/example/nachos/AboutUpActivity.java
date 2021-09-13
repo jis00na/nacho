@@ -75,5 +75,17 @@ public class AboutUpActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+        Button upsite;
+        upsite = findViewById(R.id.button_site);
+        upsite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutUpActivity.this, SiteActivity.class);
+                intent.putExtra("fromup","fromup");
+                startActivity(intent);
+            }
+        });
+
     }
 }

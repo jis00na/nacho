@@ -27,29 +27,104 @@ public class SiteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_site);
 
         Intent intent_ve = getIntent();
+        Intent intent_an = getIntent();
+        Intent intent_do = getIntent();
+        Intent intent_ft = getIntent();
+        Intent intent_pf = getIntent();
+        Intent intent_up = getIntent();
+
         String fromvegan = "";
+        String froman = "";
+        String fromdo = "";
+        String fromft = "";
+        String frompf = "";
+        String fromup = "";
+
+
         fromvegan = intent_ve.getStringExtra("fromvegan");
+        froman = intent_an.getStringExtra("froman");
+        fromdo = intent_do.getStringExtra("fromdo");
+        fromft = intent_ft.getStringExtra("fromft");
+        frompf = intent_pf.getStringExtra("frompf");
+        fromup = intent_up.getStringExtra("fromup");
+
+
         System.out.println("titleve"+R.id.title_ve);
         System.out.println("text7"+R.id.text7);
 
-        ScrollView sv_ve = (ScrollView) findViewById(R.id.scrollsite);
+        ScrollView sv = (ScrollView) findViewById(R.id.scrollsite);
+
+        /*
         TextView text_ve = (TextView) findViewById(R.id.text7);
         LinearLayout title_ve = (LinearLayout) findViewById(R.id.title_ve);
 
         int getve = (int) text_ve.getY();
         int linve = (int) title_ve.getY();
-
+*/
         if (fromvegan != null){
             if (fromvegan.equals("fromvegan")){
-                System.out.println("Y:"+linve);
+                System.out.println("vegan!!");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        sv_ve.smoothScrollTo(0, 100);
+                        sv.scrollTo(0,R.id.SiteList_ve);
                     }
-                }, 200);
-
-
+                }, 50);
+            }
+        }
+        else if (froman != null){
+            if (froman.equals("froman")){
+                System.out.println("an!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,R.id.SiteList_ve);
+                    }
+                }, 50);
+            }
+        }
+        else if (fromdo != null){
+            if (fromdo.equals("fromdo")){
+                System.out.println("do!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,R.id.SiteList_ve);
+                    }
+                }, 50);
+            }
+        }
+        else if (fromft != null){
+            if (fromft.equals("fromft")){
+                System.out.println("ft!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,R.id.SiteList_ve);
+                    }
+                }, 50);
+            }
+        }
+        else if (frompf != null){
+            if (frompf.equals("frompf")){
+                System.out.println("pf!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,R.id.SiteList_ve);
+                    }
+                }, 50);
+            }
+        }
+        else if (fromup != null){
+            if (fromup.equals("fromup")){
+                System.out.println("up!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,R.id.SiteList_ve);
+                    }
+                }, 50);
             }
         }
 

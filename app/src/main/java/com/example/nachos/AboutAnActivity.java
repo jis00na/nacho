@@ -76,6 +76,18 @@ public class AboutAnActivity extends AppCompatActivity{
             }
         });
 
+        Button ansite;
+        ansite = findViewById(R.id.button_site);
+        ansite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutAnActivity.this, SiteActivity.class);
+                intent.putExtra("froman","froman");
+                startActivity(intent);
+            }
+        });
+
+
     }
 
 }

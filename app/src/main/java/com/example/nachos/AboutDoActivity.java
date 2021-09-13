@@ -75,6 +75,18 @@ public class AboutDoActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+        Button dosite;
+        dosite = findViewById(R.id.button_site);
+        dosite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutDoActivity.this, SiteActivity.class);
+                intent.putExtra("fromdo","fromdo");
+                startActivity(intent);
+            }
+        });
+
     }
 
 }
