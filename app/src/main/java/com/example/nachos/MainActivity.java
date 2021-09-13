@@ -85,22 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 stor_page.setVisibility(View.VISIBLE);
                 break;
 
-            /*** 숨언니꺼 잠시 주석... by 지수...
-             tabLayout=findViewById(R.id.tabs);
-             viewPager=findViewById(R.id.view_pager);
-             adapter=new FragementAdapter(getSupportFragmentManager(),1);
-
-             //FragmentAdapter에 컬렉션 담기
-             adapter.addFragment(new SiteActivity());
-
-             //ViewPager Fragment 연결
-             viewPager.setAdapter(adapter);
-
-             //ViewPager과 TabLayout 연결
-             tabLayout.setupWithViewPager(viewPager);
-
-             tabLayout.getTabAt(0).setText("첫 번째");
-             ***/
         }
 
     }

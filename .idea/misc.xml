@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_about_animal.xml" value="0.1" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_about_do.xml" value="0.1" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_about_ft.xml" value="0.1" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_about_pf.xml" value="0.1" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_about_up.xml" value="0.1" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_about_ve.xml" value="0.1" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_category.xml" value="0.1" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_home.xml" value="0.136" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_main.xml" value="0.1308876811594203" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_product.xml" value="0.1" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/activity_site.xml" value="0.1" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/layout/custom_title.xml" value="0.264" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/menu/custom_title.xml" value="0.176" />
+        <entry key="..\:/Users/suris/AndroidStudioProjects/nachos/app/src/main/res/menu/title_custom.xml" value="0.1390625" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>

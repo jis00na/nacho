@@ -1,5 +1,6 @@
 package com.example.nachos;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.res.AssetManager;
 import android.content.Intent;
@@ -7,6 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import java.util.ArrayList;
 
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
@@ -58,6 +63,10 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         this.initializeData();
 
+        // custom title bar
+        //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+        //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+
         // first setting
         //dataSetting();
         //storeManager.init();
@@ -76,10 +85,13 @@ public class HomeActivity extends AppCompatActivity {
         keyword = findViewById(R.id.text71);
         add_bt = findViewById(R.id.insert_key);
 
+        Button title_back, title_prof; // 상단 타이틀
         Button home, cate, prod, stor; // 상단 탑뷰
         Button aboutpf, aboutve; // 대표 키워드 두개
         Button hash_up, hash_ve, hash_ft, hash_do, hash_aw, hash_pf; // hashtag들
 
+        title_back = findViewById(R.id.btn_Back);
+        title_prof = findViewById(R.id.btn_Profile);
         home = findViewById(R.id.button_home);
         cate = findViewById(R.id.buttom_cate);
         prod = findViewById(R.id.button_prod);
@@ -93,12 +105,29 @@ public class HomeActivity extends AppCompatActivity {
         hash_aw = findViewById(R.id.hash51);
         hash_pf = findViewById(R.id.hash61);
 
+        // 상단 타이틀 버튼 클릭 시 이벤트
+        title_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        title_prof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // 상단 탑뷰 클릭 시 이벤트
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -107,6 +136,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -115,6 +145,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, ProductActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -123,6 +154,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, SiteActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -132,6 +164,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutUpActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -140,6 +173,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -148,6 +182,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutFtActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -156,6 +191,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutDoActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -164,6 +200,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutAnActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -172,6 +209,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutPfActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -181,6 +219,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutPfActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -189,6 +228,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -198,6 +238,7 @@ public class HomeActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0);
             }
         });
 
@@ -217,7 +258,38 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
+/**
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        ActionBar actionBar = getSupportActionBar();
 
+        // Custom Actionbar
+        actionBar.setDisplayShowCustomEnabled(true);
+        //actionBar.setDisplayHomeAsUpEnabled(false); //액션바 아이콘을 업 네비게이션 형태로 표시
+        //actionBar.setDisplayShowTitleEnabled(false); //액션바에 표시되는 제목 표시유무
+        //actionBar.setDisplayShowHomeEnabled(false); //홈 아이콘을 숨김처리
+
+        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+        View actionbar = inflater.inflate(R.layout.custom_title, null);
+
+        actionBar.setCustomView(actionbar);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.btn_Back :
+                onBackPressed();
+                return true ;
+            case R.id.btn_Profile:
+                // 프로필
+                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+            default :
+                return super.onOptionsItemSelected(item) ;
+        }
+    }
+**/
     private void init(ArrayList<String> itemList) {
 
         listview = findViewById(R.id.recycler1);
