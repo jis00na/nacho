@@ -105,14 +105,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-<<<<<<< HEAD
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="7dp"
-=======
         android:layout_marginTop="100dp"
         android:layout_marginBottom="70dp"
         app:layout_constraintTop_toBottomOf="@id/group_topview"
->>>>>>> 7c912ab651c6030d74ca7be2102f40939fd94eed
         android:background="#ffffff"
         >
 

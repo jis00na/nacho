@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.res.AssetManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -68,6 +70,8 @@ public class HomeActivity extends AppCompatActivity {
     // should parse to json
     private StoreManager storeManager;
     private String siteInfo;
+    //MyListDecoration decoration = new MyListDecoration();
+    MyListDecoration decoration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,20 @@ public class HomeActivity extends AppCompatActivity {
         // custom title bar
         //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+
+        // 처음 시작하면 키워드 사이 간격 null - decoration 호출하여 간격 5 추가
+        // 처음만 호출하면
+        if(decoration ==null){
+            decoration = new MyListDecoration();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    listview.addItemDecoration(decoration);
+                }
+            }, 50);
+
+
+        }
 
         // first setting
         dataSetting();
@@ -346,8 +364,8 @@ public class HomeActivity extends AppCompatActivity {
         adapter = new MyAdapter(this, itemList, onClickItem);
         listview.setAdapter(adapter);
 
-        MyListDecoration decoration = new MyListDecoration();
-        listview.addItemDecoration(decoration);
+        //MyListDecoration decoration = new MyListDecoration();
+        //listview.addItemDecoration(decoration);
     }
 
     private View.OnClickListener onClickItem = new View.OnClickListener() {
@@ -445,13 +463,14 @@ public class HomeActivity extends AppCompatActivity {
 
     private void insertKeyword(){
         String word = keyword.getText().toString();
-        // 정규식 기반 예외처리 필요 (한, 영 숫자? 정도)
+        // 정규식 기반 예외처리 필요 (한, 영 숫자? 정도)됨
         String regex = "^[a-zA-Z0-9가-힣]*$";
         if (Pattern.matches(regex, word)){
             // 공백은 예외적으로 자동 처리되어야하나?
             // 인스타 태그처럼 _ 는 어떨까
             databaseReference.child(word).setValue(word); // (key, value)
             meaningOutKeywordList.add("#" + word);
+
         }else {
             // 잘못된 문자열을 넣었을 때 아래 태그 간격이 계속 벌어지는 버그가 있음
             Toast.makeText(HomeActivity.this, "한글, 영문, 숫자로만 구성된 문자를 입력해주세요", Toast.LENGTH_SHORT).show();

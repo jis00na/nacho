@@ -169,6 +169,7 @@ public class AboutVeActivity extends AppCompatActivity {
             }
         });
 
+        /*
         adapter.addItem(new Product("사이트", "비건" , "제품명", R.drawable.aboutve));
         adapter.addItem(new Product("사이트", "비건" , "제품명", R.drawable.aboutve));
 
@@ -180,7 +181,7 @@ public class AboutVeActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "이름 : " + item.getName() + "\n 가격 : " + item.getCost() +
                         "\n 설명 : " + item.getNotification(),Toast.LENGTH_LONG).show();
             }
-        });
+        }); */
 
 
     }
