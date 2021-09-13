@@ -29,11 +29,12 @@ public class StoreManager {
     private String info;
     private ArrayList<SiteInfo> infoList = new ArrayList<SiteInfo>();
     private String[] options = {"Donation", "FairTrading", "Vegan", "ZeroWaste", "AnimalWelfare"};
+
     public StoreManager(String data){
         db = FirebaseFirestore.getInstance();
         this.info = data;
-
     }
+
     public void init(){
         jsonParsing(info);
         setDataToFirestore();
@@ -45,7 +46,18 @@ public class StoreManager {
             docData.put("name", infoList.get(i).getName());
             docData.put("url", infoList.get(i).getUrl());
             docData.put("tags", infoList.get(i).getTags().get(0));
-            db.collection("site_info").document(infoList.get(i).getName()).set(docData);
+            for(int j = 0; j < infoList.get(i).getTags().size(); j++){
+//                db.collection("encryptionVer")
+//                        .document(infoList.get(i).getTags().get(j))
+//                        .collection(infoList.get(i).getName())
+//                        .add(docData);
+
+                db.collection("normalVer")
+                        .document(infoList.get(i).getTags().get(j))
+                        .collection(infoList.get(i).getName())
+                        .document(infoList.get(i).getName()) // document name 지정시 특징 keyword로 접근 가능, Or 키워드 암호화 형태로
+                        .set(docData);
+            }
         }
     }
 
