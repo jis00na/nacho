@@ -19,7 +19,16 @@ public class AboutUpActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_up);
 
+        Button title_back, title_prof; // 상단 타이틀
+        Button home, cate, prod, stor; // 상단 탑뷰
         Button hash_up, hash_ve, hash_ft, hash_do, hash_aw, hash_pf; // hashtag들
+
+        title_back = findViewById(R.id.btn_Back);
+        title_prof = findViewById(R.id.btn_Profile);
+        home = findViewById(R.id.button_home);
+        cate = findViewById(R.id.buttom_cate);
+        prod = findViewById(R.id.button_prod);
+        stor = findViewById(R.id.button_stor);
         hash_up = findViewById(R.id.hash1);
         hash_ve = findViewById(R.id.hash2);
         hash_ft = findViewById(R.id.hash3);
@@ -27,12 +36,66 @@ public class AboutUpActivity extends AppCompatActivity{
         hash_aw = findViewById(R.id.hash5);
         hash_pf = findViewById(R.id.hash6);
 
+        // 상단 타이틀 버튼 클릭 시 이벤트
+        title_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        title_prof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // 상단 탑뷰 클릭 시 이벤트
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutUpActivity.this, HomeActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        cate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutUpActivity.this, CategoryActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        prod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutUpActivity.this, ProductActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        stor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutUpActivity.this, SiteActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
         //HashTag 키워드 클릭 시 이벤트
         hash_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AboutUpActivity.this, AboutUpActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -41,6 +104,7 @@ public class AboutUpActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(AboutUpActivity.this, AboutVeActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -49,6 +113,7 @@ public class AboutUpActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(AboutUpActivity.this, AboutFtActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -57,6 +122,7 @@ public class AboutUpActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(AboutUpActivity.this, AboutDoActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -65,6 +131,7 @@ public class AboutUpActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(AboutUpActivity.this, AboutAnActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -73,6 +140,7 @@ public class AboutUpActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(AboutUpActivity.this, AboutPfActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 

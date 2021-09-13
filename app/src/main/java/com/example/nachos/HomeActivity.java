@@ -1,5 +1,6 @@
 package com.example.nachos;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -9,9 +10,16 @@ import android.os.Bundle;
 import android.util.Log;
 import java.util.ArrayList;
 
+
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.Window;
+
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
@@ -35,6 +43,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import static android.view.inputmethod.EditorInfo.*;
 
@@ -66,10 +75,14 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         this.initializeData();
 
+        // custom title bar
+        //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+        //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+
         // first setting
-        //dataSetting();
-        //storeManager.init();
-        //storeManager.getData();
+        dataSetting();
+        storeManager.init();
+        storeManager.getData();
 
         // initialize DB
         initDatabase();
@@ -84,10 +97,13 @@ public class HomeActivity extends AppCompatActivity {
         keyword = findViewById(R.id.text71);
         add_bt = findViewById(R.id.insert_key);
 
+        Button title_back, title_prof; // 상단 타이틀
         Button home, cate, prod, stor; // 상단 탑뷰
         Button aboutpf, aboutve; // 대표 키워드 두개
         Button hash_up, hash_ve, hash_ft, hash_do, hash_aw, hash_pf; // hashtag들
 
+        title_back = findViewById(R.id.btn_Back);
+        title_prof = findViewById(R.id.btn_Profile);
         home = findViewById(R.id.button_home);
         cate = findViewById(R.id.buttom_cate);
         prod = findViewById(R.id.button_prod);
@@ -102,12 +118,30 @@ public class HomeActivity extends AppCompatActivity {
         hash_pf = findViewById(R.id.hash61);
 
 
+        // 상단 타이틀 버튼 클릭 시 이벤트
+        title_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        title_prof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         // 상단 탑뷰 클릭 시 이벤트
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -116,6 +150,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -124,6 +159,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, ProductActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -132,6 +168,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, SiteActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -141,6 +178,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutUpActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -149,6 +187,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -157,6 +196,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutFtActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -165,6 +205,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutDoActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -173,6 +214,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutAnActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -181,6 +223,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutPfActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -190,6 +233,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutPfActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -198,6 +242,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -207,6 +252,7 @@ public class HomeActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0);
             }
         });
 
@@ -257,9 +303,39 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
+/**
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        ActionBar actionBar = getSupportActionBar();
+
+        // Custom Actionbar
+        actionBar.setDisplayShowCustomEnabled(true);
+        //actionBar.setDisplayHomeAsUpEnabled(false); //액션바 아이콘을 업 네비게이션 형태로 표시
+        //actionBar.setDisplayShowTitleEnabled(false); //액션바에 표시되는 제목 표시유무
+        //actionBar.setDisplayShowHomeEnabled(false); //홈 아이콘을 숨김처리
+
+        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+        View actionbar = inflater.inflate(R.layout.custom_title, null);
 
 
+        actionBar.setCustomView(actionbar);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.btn_Back :
+                onBackPressed();
+                return true ;
+            case R.id.btn_Profile:
+                // 프로필
+                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+            default :
+                return super.onOptionsItemSelected(item) ;
+        }
+    }
+**/
 
     private void init(ArrayList<String> itemList) {
 
@@ -324,12 +400,12 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                Toast.makeText(HomeActivity.this,  "데이터가 변경되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                Toast.makeText(HomeActivity.this,  "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -369,8 +445,17 @@ public class HomeActivity extends AppCompatActivity {
 
     private void insertKeyword(){
         String word = keyword.getText().toString();
-        databaseReference.child(word).setValue(word); // (key, value)
-        meaningOutKeywordList.add("#" + word);
+        // 정규식 기반 예외처리 필요 (한, 영 숫자? 정도)
+        String regex = "^[a-zA-Z0-9가-힣]*$";
+        if (Pattern.matches(regex, word)){
+            // 공백은 예외적으로 자동 처리되어야하나?
+            // 인스타 태그처럼 _ 는 어떨까
+            databaseReference.child(word).setValue(word); // (key, value)
+            meaningOutKeywordList.add("#" + word);
+        }else {
+            // 잘못된 문자열을 넣었을 때 아래 태그 간격이 계속 벌어지는 버그가 있음
+            Toast.makeText(HomeActivity.this, "한글, 영문, 숫자로만 구성된 문자를 입력해주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

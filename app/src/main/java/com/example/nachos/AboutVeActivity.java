@@ -23,8 +23,16 @@ public class AboutVeActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         final ProductAdapter adapter = new ProductAdapter();
 
+        Button title_back, title_prof; // 상단 타이틀
+        Button home, cate, prod, stor; // 상단 탑뷰
         Button hash_up, hash_ve, hash_ft, hash_do, hash_aw, hash_pf; // hashtag들
 
+        title_back = findViewById(R.id.btn_Back);
+        title_prof = findViewById(R.id.btn_Profile);
+        home = findViewById(R.id.button_home);
+        cate = findViewById(R.id.buttom_cate);
+        prod = findViewById(R.id.button_prod);
+        stor = findViewById(R.id.button_stor);
         hash_up = findViewById(R.id.hash1);
         hash_ve = findViewById(R.id.hash2);
         hash_ft = findViewById(R.id.hash3);
@@ -32,12 +40,66 @@ public class AboutVeActivity extends AppCompatActivity {
         hash_aw = findViewById(R.id.hash5);
         hash_pf = findViewById(R.id.hash6);
 
+        // 상단 타이틀 버튼 클릭 시 이벤트
+        title_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        title_prof.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // 상단 탑뷰 클릭 시 이벤트
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutVeActivity.this, HomeActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        cate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutVeActivity.this, CategoryActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        prod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutVeActivity.this, ProductActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        stor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutVeActivity.this, SiteActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
         //HashTag 키워드 클릭 시 이벤트
         hash_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(AboutVeActivity.this, AboutUpActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -46,6 +108,7 @@ public class AboutVeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutVeActivity.this, AboutVeActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -54,6 +117,7 @@ public class AboutVeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutVeActivity.this, AboutFtActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -62,6 +126,7 @@ public class AboutVeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutVeActivity.this, AboutDoActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -70,6 +135,7 @@ public class AboutVeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutVeActivity.this, AboutAnActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -78,6 +144,7 @@ public class AboutVeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(AboutVeActivity.this, AboutPfActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
