@@ -54,20 +54,61 @@ public class SiteActivity extends AppCompatActivity {
 
         ScrollView sv = (ScrollView) findViewById(R.id.scrollsite);
 
-        /*
-        TextView text_ve = (TextView) findViewById(R.id.text7);
-        LinearLayout title_ve = (LinearLayout) findViewById(R.id.title_ve);
 
-        int getve = (int) text_ve.getY();
-        int linve = (int) title_ve.getY();
+        LinearLayout text_ve;
+        text_ve = (LinearLayout) findViewById(R.id.title_ve);
+
+
+        /*
+        int getve = (int) text_ve.getTop();
+        int linve = (int) title_ve.getBottom();
+        System.out.println("textve gettop: "+ getve);
+        System.out.println("linve gettop: "+ linve);
+
+        int[] loc = new int[2];
+        int[] loc1 = new int[2];
+
+
+        text_ve.getLocationInWindow(loc);
+        System.out.println("loc in window : " + loc[0] + ", " + loc[1]);
+
+        text_ve.getLocationOnScreen(loc1);
+        System.out.println("loc on screen : " + loc1[0] + ", " + loc1[1]);
+
+        int left = text_ve.getLeft();
+        int top = text_ve.getTop();
+        int right = text_ve.getRight();
+        int bottom = text_ve.getBottom();
+        System.out.println( "btn left : " + left + ", right : " + right + ", top : " + top + ", bottom : " + bottom);
+
 */
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                /*
+                int[] loc = new int[2];
+                int[] loc1 = new int[2];
+
+                text_ve.getLocationInWindow(loc);
+                System.out.println("loc in window : " + loc[0] + ", " + loc[1]);
+                text_ve.getLocationOnScreen(loc1);
+                System.out.println("loc on screen : " + loc1[0] + ", " + loc1[1]);
+                */
+
+                int top = text_ve.getTop();
+                System.out.println(  ", top : " + top );
+            }
+
+        }, 50);
+
         if (fromvegan != null){
             if (fromvegan.equals("fromvegan")){
                 System.out.println("vegan!!");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        sv.scrollTo(0,R.id.SiteList_ve);
+                        sv.scrollTo(0,1579);
                     }
                 }, 50);
             }
