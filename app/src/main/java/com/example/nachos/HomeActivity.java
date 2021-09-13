@@ -2,19 +2,28 @@ package com.example.nachos;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.res.AssetManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import java.util.ArrayList;
 
+
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,6 +44,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+
+import static android.view.inputmethod.EditorInfo.*;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -106,6 +117,7 @@ public class HomeActivity extends AppCompatActivity {
         hash_aw = findViewById(R.id.hash51);
         hash_pf = findViewById(R.id.hash61);
 
+
         // 상단 타이틀 버튼 클릭 시 이벤트
         title_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +133,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
             }
         });
+
 
         // 상단 탑뷰 클릭 시 이벤트
         home.setOnClickListener(new View.OnClickListener() {
@@ -249,14 +262,45 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.setPageMargin(margin/2);
 
         viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
+        //keyword.setImeOptions(IME_ACTION_GO);
+
+        keyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+            {
+                switch (actionId) {
+                    case IME_ACTION_GO:
+
+                        insertKeyword();
+                        init(meaningOutKeywordList); // 버튼 누르면 init()호출
+                        hideKeyboard();
+                        // 검색 동작
+                        break;
+                    default:
+                        // 기본 엔터키 동작
+                        return false;
+                }
+                return true;
+            }
+        });
+
 
         add_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 insertKeyword();
                 init(meaningOutKeywordList); // 버튼 누르면 init()호출
+                hideKeyboard();
             }
+
+
+
         });
+
+
+
+
+
+
 
     }
 /**
@@ -272,6 +316,7 @@ public class HomeActivity extends AppCompatActivity {
 
         LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
         View actionbar = inflater.inflate(R.layout.custom_title, null);
+
 
         actionBar.setCustomView(actionbar);
         return true;
@@ -291,6 +336,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 **/
+
     private void init(ArrayList<String> itemList) {
 
         listview = findViewById(R.id.recycler1);
@@ -313,6 +359,19 @@ public class HomeActivity extends AppCompatActivity {
     };
 
 
+
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        keyword.setText(null);
+
+    }
 
     public void initializeData() //이미지를 저장함 배열에
     {

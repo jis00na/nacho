@@ -143,5 +143,17 @@ public class AboutFtActivity extends AppCompatActivity{
                 overridePendingTransition(0, 0);
             }
         });
+
+        Button ftsite;
+        ftsite = findViewById(R.id.button_site);
+        ftsite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutFtActivity.this, SiteActivity.class);
+                intent.putExtra("fromft","fromft");
+                startActivity(intent);
+            }
+        });
+
     }
 }
