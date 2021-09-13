@@ -34,6 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -68,9 +69,9 @@ public class HomeActivity extends AppCompatActivity {
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
 
         // first setting
-        //dataSetting();
-        //storeManager.init();
-        //storeManager.getData();
+        dataSetting();
+        storeManager.init();
+        storeManager.getData();
 
         // initialize DB
         initDatabase();
@@ -340,12 +341,12 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                Toast.makeText(HomeActivity.this,  "데이터가 변경되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                Toast.makeText(HomeActivity.this,  "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -385,8 +386,17 @@ public class HomeActivity extends AppCompatActivity {
 
     private void insertKeyword(){
         String word = keyword.getText().toString();
-        databaseReference.child(word).setValue(word); // (key, value)
-        meaningOutKeywordList.add("#" + word);
+        // 정규식 기반 예외처리 필요 (한, 영 숫자? 정도)
+        String regex = "^[a-zA-Z0-9가-힣]*$";
+        if (Pattern.matches(regex, word)){
+            // 공백은 예외적으로 자동 처리되어야하나?
+            // 인스타 태그처럼 _ 는 어떨까
+            databaseReference.child(word).setValue(word); // (key, value)
+            meaningOutKeywordList.add("#" + word);
+        }else {
+            // 잘못된 문자열을 넣었을 때 아래 태그 간격이 계속 벌어지는 버그가 있음
+            Toast.makeText(HomeActivity.this, "한글, 영문, 숫자로만 구성된 문자를 입력해주세요", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
