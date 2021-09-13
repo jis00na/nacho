@@ -143,6 +143,18 @@ public class AboutPfActivity extends AppCompatActivity{
                 overridePendingTransition(0, 0);
             }
         });
+
+        Button pfsite;
+        pfsite = findViewById(R.id.button_site);
+        pfsite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutPfActivity.this, SiteActivity.class);
+                intent.putExtra("frompf","frompf");
+                startActivity(intent);
+            }
+        });
+
     }
 
 }
