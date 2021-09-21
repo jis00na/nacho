@@ -36,6 +36,29 @@ public class AboutFtActivity extends AppCompatActivity{
         hash_aw = findViewById(R.id.hash5);
         hash_pf = findViewById(R.id.hash6);
 
+        //content
+        Button content_do, content_up;
+        content_do = findViewById(R.id.content_do);
+        content_up = findViewById(R.id.content_up);
+
+        content_do.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutFtActivity.this, AboutDoActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        content_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutFtActivity.this, AboutUpActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
         // 상단 타이틀 버튼 클릭 시 이벤트
         title_back.setOnClickListener(new View.OnClickListener() {
             @Override

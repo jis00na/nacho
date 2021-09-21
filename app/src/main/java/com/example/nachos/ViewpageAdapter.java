@@ -1,6 +1,7 @@
 package com.example.nachos;
 import android.content.Context;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import static android.net.wifi.p2p.nsd.WifiP2pServiceRequest.newInstance;
+import static androidx.core.content.ContextCompat.startActivity;
 
 class ViewPagerAdapter extends PagerAdapter {
     private Context mContext;
@@ -35,6 +37,18 @@ class ViewPagerAdapter extends PagerAdapter {
         position= position % 7;
         ImageView imageView = view.findViewById(R.id.imageView);
         imageView.setImageResource(imageList.get(position));
+
+        /*
+        switch (position){
+            case 0:
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(HomeActivity.class, AboutVeActivity.class);
+                        startActivity(intent);
+                    }
+                });
+        }*/
 
 
         //imageList.get(position);

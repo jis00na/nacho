@@ -36,6 +36,29 @@ public class AboutDoActivity extends AppCompatActivity{
         hash_aw = findViewById(R.id.hash5);
         hash_pf = findViewById(R.id.hash6);
 
+        //content
+        Button content_ft, content_ve;
+        content_ft = findViewById(R.id.content_ft);
+        content_ve = findViewById(R.id.content_ve);
+
+        content_ft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutDoActivity.this, AboutFtActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        content_ve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutDoActivity.this, AboutVeActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
         // 상단 타이틀 버튼 클릭 시 이벤트
         title_back.setOnClickListener(new View.OnClickListener() {
             @Override
