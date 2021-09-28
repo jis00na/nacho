@@ -216,6 +216,9 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
+
+
+
         });
 
         hash_pf.setOnClickListener(new View.OnClickListener() {

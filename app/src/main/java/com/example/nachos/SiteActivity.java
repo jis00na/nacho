@@ -170,6 +170,17 @@ public class SiteActivity extends AppCompatActivity {
                 }, 50);
             }
         }
+        else if (fromup != null){
+            if (fromup.equals("fromup")){
+                System.out.println("up!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,R.id.SiteList_ve);
+                    }
+                }, 50);
+            }
+        }
 
 
         Button title_back, title_prof; // 상단 타이틀

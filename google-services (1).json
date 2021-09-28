@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "288597479494",
+    "project_id": "nachologin-839dc",
+    "storage_bucket": "nachologin-839dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288597479494:android:000e7d846d7d0e9c2aba47",
+        "android_client_info": {
+          "package_name": "com.example.nachos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288597479494-j11gvmomuuktha4hor063gi39bnj3jrp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nachos",
+            "certificate_hash": "d83b219fe9fac49d298812843abd646aab8d422b"
+          }
+        },
+        {
+          "client_id": "288597479494-ou5j8dlhm9oueamjp3jga1op9sd1dgto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6cEmoizZMd_2SdLh6S0g6Imdny35H1e0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "288597479494-ou5j8dlhm9oueamjp3jga1op9sd1dgto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
