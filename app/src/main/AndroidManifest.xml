@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.nachos">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -13,15 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nachos">
-        <activity android:name=".SiteActivity"
+        <activity android:name=".HomeActivity"> </activity>
+        <activity
+            android:name=".SiteActivity"
             android:exported="true"
-            tools:ignore="Instantiatable"></activity>
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".AboutVeActivity"
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".AboutGoogleLogin"
             android:exported="true"
             tools:ignore="Instantiatable">
             <intent-filter>
@@ -40,10 +43,7 @@
             android:name=".ProductActivity"
             android:exported="false"
             tools:ignore="Instantiatable" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="false"
-            tools:ignore="Instantiatable" />
+
         <activity
             android:name=".FragementAdapter"
             tools:ignore="Instantiatable" />

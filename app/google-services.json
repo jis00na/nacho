@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "432957268391",
+    "firebase_url": "https://nacho-da37d-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "nacho-da37d",
     "storage_bucket": "nacho-da37d.appspot.com"
   },
@@ -19,6 +20,14 @@
           "android_info": {
             "package_name": "com.example.nachos",
             "certificate_hash": "ed05bf1160f336442f841554ad88f585238ffe1c"
+          }
+        },
+        {
+          "client_id": "432957268391-t4n53nc4ke238v7ii17rbtlq3u3u7d2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nachos",
+            "certificate_hash": "16aba2d6fcfcd0b222693a3e525b7a4d19a670c5"
           }
         },
         {
