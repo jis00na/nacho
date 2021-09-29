@@ -28,7 +28,7 @@ public class StoreManager {
     private FirebaseFirestore db;
     private String info;
     private ArrayList<SiteInfo> infoList = new ArrayList<SiteInfo>();
-    private String[] options = {"Donation", "FairTrading", "Vegan", "ZeroWaste", "AnimalWelfare"};
+    private String[] options = {"Donation", "FairTrading", "Vegan", "ZeroWaste", "AnimalWelfare", "EcoFriendly"};
 
     public StoreManager(String data){
         db = FirebaseFirestore.getInstance();

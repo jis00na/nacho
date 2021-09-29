@@ -242,6 +242,50 @@
       "name": "바로란",
       "url": "https://barolan.com/",
       "tags": ["동물복지"]
+    },
+
+    {
+      "name": "마켓컬리",
+      "url": "https://www.kurly.com/shop/main/index.php",
+      "tags": ["동물복지"]
+    },
+
+    {
+      "name": "생협",
+      "url": "http://www.icoop.or.kr/coopmall/",
+      "tags": ["동물복지"]
+    }
+
+  ],
+  "EcoFriendly": [
+    {
+      "name": "톤28",
+      "url": "https://www.toun28.com/",
+      "tags": ["친환경"]
+    },
+
+    {
+      "name": "아렌시아",
+      "url": "https://www.arencia.com/ko/",
+      "tags": ["친환경"]
+    },
+
+    {
+      "name": "마이아일랜드",
+      "url": "https://m.myisland.co.kr/layout/basic/about.html",
+      "tags": ["친환경"]
+    },
+
+    {
+      "name": "모레상점",
+      "url": "https://www.morestore.co.kr/",
+      "tags": ["친환경"]
+    },
+
+    {
+      "name": "헬로네이처",
+      "url": "https://www.hellonature.co.kr/service-info/index.do",
+      "tags": ["친환경"]
     }
   ]
 }

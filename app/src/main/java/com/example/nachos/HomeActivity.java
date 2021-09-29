@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -23,6 +26,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -30,7 +34,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,6 +47,10 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,6 +81,9 @@ public class HomeActivity extends AppCompatActivity {
     private StoreManager storeManager;
     private String siteInfo;
 
+    private ImageView testImgView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +93,9 @@ public class HomeActivity extends AppCompatActivity {
         // custom title bar
         //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+        testImgView = (ImageView)findViewById(R.id.testImgView);
+
+        getImageFromStorage();
 
         // first setting
         dataSetting();
@@ -283,7 +301,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
         add_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -291,16 +308,7 @@ public class HomeActivity extends AppCompatActivity {
                 init(meaningOutKeywordList); // 버튼 누르면 init()호출
                 hideKeyboard();
             }
-
-
-
         });
-
-
-
-
-
-
 
     }
 /**
@@ -395,17 +403,17 @@ public class HomeActivity extends AppCompatActivity {
         mChild = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Toast.makeText(HomeActivity.this, keyword.getText().toString() + "추가 완료", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(HomeActivity.this, keyword.getText().toString() + "추가 완료", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Toast.makeText(HomeActivity.this,  "데이터가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(HomeActivity.this,  "데이터가 변경되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Toast.makeText(HomeActivity.this,  "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(HomeActivity.this,  "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -485,4 +493,25 @@ public class HomeActivity extends AppCompatActivity {
         return json;
     }
 
+    private void getImageFromStorage(){
+        Button btn = findViewById(R.id.testBtn);
+        testImgView = (ImageView) findViewById(R.id.testImgView);
+        FirebaseStorage storage = FirebaseStorage.getInstance(); // FirebaseStorage 인스턴스 생성
+        StorageReference storageRef = storage.getReference("테스트폴더/사과.jpg"); // 스토리지 공간을 참조해서 이미지를 가져옴
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Glide.with(view).load(storageRef).override(1000).into(testImgView); // Glide를 사용하여 이미지 로드
+//                storageRef.getDownloadUrl().addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()){
+//                        Glide.with(getApplicationContext() /* context */)
+//                                .load(storageRef)
+//                                .into(testImgView);
+//                    }else{
+//                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+            }
+        });
+    }
 }
