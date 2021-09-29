@@ -83,6 +83,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         this.initializeData();
+
+        /*
         Button btn = findViewById(R.id.testBtn);
         ImageView testImgView = (ImageView) findViewById(R.id.testImgView);
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -95,7 +97,7 @@ public class HomeActivity extends AppCompatActivity {
                 StorageReference storageRef = storage.getReference("apple.jpg"); // 스토리지 공간을 참조해서 이미지를 가져옴
                 Glide.with(view).load(storageRef).into(testImgView); // Glide를 사용하여 이미지 로드
             }
-        });
+        });*/
 
         // custom title bar
         //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
@@ -167,6 +169,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomeActivity.this, AboutGoogleLogin.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -406,17 +411,20 @@ public class HomeActivity extends AppCompatActivity {
         adapter = new MyAdapter(this, itemList, onClickItem);
         listview.setAdapter(adapter);
 
-        //MyListDecoration decoration = new MyListDecoration();
-        //listview.addItemDecoration(decoration);
+        MyListDecoration decoration = new MyListDecoration();
+        listview.addItemDecoration(decoration);
     }
 
+    // meaningout keywords
     private View.OnClickListener onClickItem = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             String str = (String) v.getTag();
             Toast.makeText(HomeActivity.this, str, Toast.LENGTH_SHORT).show();
+
         }
     };
+
 
 
 
