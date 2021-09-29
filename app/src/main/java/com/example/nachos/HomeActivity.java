@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.res.AssetManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import java.util.ArrayList;
 
@@ -23,13 +24,16 @@ import android.view.Window;
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +43,9 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.geo.type.Viewport;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,6 +75,8 @@ public class HomeActivity extends AppCompatActivity {
     // should parse to json
     private StoreManager storeManager;
     private String siteInfo;
+    //MyListDecoration decoration = new MyListDecoration();
+    MyListDecoration decoration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +84,38 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         this.initializeData();
 
+        /*
+        Button btn = findViewById(R.id.testBtn);
+        ImageView testImgView = (ImageView) findViewById(R.id.testImgView);
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference().child("apple.jpg");
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseStorage storage = FirebaseStorage.getInstance(); // FirebaseStorage 인스턴스 생성
+                StorageReference storageRef = storage.getReference("apple.jpg"); // 스토리지 공간을 참조해서 이미지를 가져옴
+                Glide.with(view).load(storageRef).into(testImgView); // Glide를 사용하여 이미지 로드
+            }
+        });*/
+
         // custom title bar
         //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+
+        // 처음 시작하면 키워드 사이 간격 null - decoration 호출하여 간격 5 추가
+        // 처음만 호출하면
+        if(decoration ==null){
+            decoration = new MyListDecoration();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    listview.addItemDecoration(decoration);
+                }
+            }, 50);
+
+
+        }
 
         // first setting
         dataSetting();
@@ -131,6 +169,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomeActivity.this, AboutGoogleLogin.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -262,8 +303,32 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.setPageMargin(margin/2);
 
         viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
-        //keyword.setImeOptions(IME_ACTION_GO);
 
+      
+        /*
+        viewPager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int position = imageList.get(0);
+                int pos1 = imageList.get(1);
+                if (position == 0){
+                    Intent intent = new Intent(HomeActivity.this, AboutPfActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
+                else if (pos1 == 1){
+                    Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
+                System.out.println("img0:"+imageList.get(0));
+                System.out.println("img1:"+imageList.get(1));
+
+                
+            }
+        }); */
+
+        //keyword.setImeOptions(IME_ACTION_GO);
         keyword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
             {
@@ -350,13 +415,16 @@ public class HomeActivity extends AppCompatActivity {
         listview.addItemDecoration(decoration);
     }
 
+    // meaningout keywords
     private View.OnClickListener onClickItem = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             String str = (String) v.getTag();
             Toast.makeText(HomeActivity.this, str, Toast.LENGTH_SHORT).show();
+
         }
     };
+
 
 
 
@@ -384,7 +452,9 @@ public class HomeActivity extends AppCompatActivity {
         imageList.add(R.drawable.main_animal);
         imageList.add(R.drawable.main_donation);
         imageList.add(R.drawable.main_upcycling);
+
     }
+
 
     private void dataSetting(){
         siteInfo = getJsonString();
@@ -395,17 +465,17 @@ public class HomeActivity extends AppCompatActivity {
         mChild = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Toast.makeText(HomeActivity.this, keyword.getText().toString() + "추가 완료", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HomeActivity.this, keyword.getText().toString() + "추가 완료", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Toast.makeText(HomeActivity.this,  "데이터가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HomeActivity.this,  "데이터가 변경되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Toast.makeText(HomeActivity.this,  "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(HomeActivity.this,  "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -445,13 +515,14 @@ public class HomeActivity extends AppCompatActivity {
 
     private void insertKeyword(){
         String word = keyword.getText().toString();
-        // 정규식 기반 예외처리 필요 (한, 영 숫자? 정도)
+        // 정규식 기반 예외처리 필요 (한, 영 숫자? 정도)됨
         String regex = "^[a-zA-Z0-9가-힣]*$";
         if (Pattern.matches(regex, word)){
             // 공백은 예외적으로 자동 처리되어야하나?
             // 인스타 태그처럼 _ 는 어떨까
             databaseReference.child(word).setValue(word); // (key, value)
             meaningOutKeywordList.add("#" + word);
+
         }else {
             // 잘못된 문자열을 넣었을 때 아래 태그 간격이 계속 벌어지는 버그가 있음
             Toast.makeText(HomeActivity.this, "한글, 영문, 숫자로만 구성된 문자를 입력해주세요", Toast.LENGTH_SHORT).show();

@@ -27,6 +27,7 @@ public class AboutVeActivity extends AppCompatActivity {
         Button home, cate, prod, stor; // 상단 탑뷰
         Button hash_up, hash_ve, hash_ft, hash_do, hash_aw, hash_pf; // hashtag들
 
+
         title_back = findViewById(R.id.btn_Back);
         title_prof = findViewById(R.id.btn_Profile);
         home = findViewById(R.id.button_home);
@@ -39,6 +40,31 @@ public class AboutVeActivity extends AppCompatActivity {
         hash_do = findViewById(R.id.hash4);
         hash_aw = findViewById(R.id.hash5);
         hash_pf = findViewById(R.id.hash6);
+
+        //content
+        Button content_ft, content_pf;
+        content_ft = findViewById(R.id.content_ft);
+        content_pf = findViewById(R.id.content_pf);
+
+        content_ft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutVeActivity.this, AboutFtActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+        content_pf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AboutVeActivity.this, AboutPfActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
+
+
 
         // 상단 타이틀 버튼 클릭 시 이벤트
         title_back.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +195,7 @@ public class AboutVeActivity extends AppCompatActivity {
             }
         });
 
+        /*
         adapter.addItem(new Product("사이트", "비건" , "제품명", R.drawable.aboutve));
         adapter.addItem(new Product("사이트", "비건" , "제품명", R.drawable.aboutve));
 
@@ -180,7 +207,7 @@ public class AboutVeActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "이름 : " + item.getName() + "\n 가격 : " + item.getCost() +
                         "\n 설명 : " + item.getNotification(),Toast.LENGTH_LONG).show();
             }
-        });
+        }); */
 
 
     }
