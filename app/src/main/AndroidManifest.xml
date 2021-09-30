@@ -12,7 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nachos">
-        <activity android:name=".HomeActivity"> </activity>
+        <activity android:name=".MypageActivity"></activity>
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".CountActivity" />
+        <activity
+            android:name=".AboutGoogleLogin"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".SiteActivity"
             android:exported="true"
@@ -22,7 +28,7 @@
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".AboutGoogleLogin"
+            android:name=".StartActivity"
             android:exported="true"
             tools:ignore="Instantiatable">
             <intent-filter>
@@ -41,7 +47,6 @@
             android:name=".ProductActivity"
             android:exported="false"
             tools:ignore="Instantiatable" />
-
         <activity
             android:name=".FragementAdapter"
             tools:ignore="Instantiatable" />

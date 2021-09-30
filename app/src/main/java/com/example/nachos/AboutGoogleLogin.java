@@ -104,6 +104,10 @@ public class AboutGoogleLogin extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
                             Toast.makeText(getApplicationContext(), "Complete", Toast.LENGTH_LONG).show();
+                            System.out.println(user);
+                            Intent intent = new Intent(AboutGoogleLogin.this, MypageActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
 
                         } else {
                             // If sign in fails, display a message to the user.
