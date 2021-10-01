@@ -43,7 +43,6 @@ public class ProductActivity extends AppCompatActivity{
         title_prof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ProductActivity.this, AboutGoogleLogin.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);

@@ -6,18 +6,24 @@ public class SiteInfo {
 
     private String name;
     private String url;
+    private String logoRef;
     private ArrayList<String> tags;
+    private ArrayList<ProductInfo> products;
 
     SiteInfo() {
         this.name = "";
         this.url = "";
+        this.logoRef = "";
         this.tags = null;
+        this.products = null;
     }
 
-    SiteInfo(String name, String url, ArrayList<String> tags) {
+    SiteInfo(String name, String url, String logoRef, ArrayList<String> tags, ArrayList<ProductInfo> products) {
         this.name = name;
         this.url = url;
+        this.logoRef = logoRef;
         this.tags = tags;
+        this.products = products;
     }
 
     public ArrayList<String> getTags() {
@@ -45,4 +51,19 @@ public class SiteInfo {
         this.url = url;
     }
 
+    public String getLogoRef() {
+        return logoRef;
+    }
+
+    public void setLogoRef(String logoRef) {
+        this.logoRef = logoRef;
+    }
+
+    public ArrayList<ProductInfo> getProducts() {
+        return products;
+    }
+
+    public void setProducts(ArrayList<ProductInfo> products) {
+        this.products = products;
+    }
 }
