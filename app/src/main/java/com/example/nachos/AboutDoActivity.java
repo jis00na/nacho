@@ -72,6 +72,7 @@ public class AboutDoActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+
             }
         });
 
