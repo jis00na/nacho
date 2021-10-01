@@ -37,10 +37,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
-<<<<<<< HEAD
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-=======
->>>>>>> 911db120523a7e3d294022feb873ced3c8d346c7
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,16 +49,13 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-<<<<<<< HEAD
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-=======
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.geo.type.Viewport;
->>>>>>> 911db120523a7e3d294022feb873ced3c8d346c7
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -84,6 +78,8 @@ public class HomeActivity extends AppCompatActivity {
     Button add_bt;
     // meaningOut Keyword List
     private ArrayList<String> meaningOutKeywordList = new ArrayList<String>();
+
+    private ApplicationState appState;
 
     // Realtime DB Event Listener
     private ChildEventListener mChild;
@@ -123,8 +119,6 @@ public class HomeActivity extends AppCompatActivity {
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
         testImgView = (ImageView)findViewById(R.id.testImgView);
 
-        getImageFromStorage();
-
         // 처음 시작하면 키워드 사이 간격 null - decoration 호출하여 간격 5 추가
         // 처음만 호출하면
         if(decoration ==null){
@@ -141,7 +135,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // first setting
         dataSetting();
-        storeManager.init();
+//        storeManager.init();
         storeManager.getData();
 
         // initialize DB
@@ -150,6 +144,9 @@ public class HomeActivity extends AppCompatActivity {
         // load keyword data
         loadKeyword();
         init(meaningOutKeywordList);
+
+        // Load Global Data
+        appState = (ApplicationState) getApplication();
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setClipToPadding(false);
@@ -311,11 +308,11 @@ public class HomeActivity extends AppCompatActivity {
 
         // About 비건 페이지 이동
         aboutve.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -326,7 +323,7 @@ public class HomeActivity extends AppCompatActivity {
 
         viewPager.setAdapter(new ViewPagerAdapter(this, imageList));
 
-      
+
         /*
         viewPager.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -346,7 +343,7 @@ public class HomeActivity extends AppCompatActivity {
                 System.out.println("img0:"+imageList.get(0));
                 System.out.println("img1:"+imageList.get(1));
 
-                
+
             }
         }); */
 
@@ -380,39 +377,39 @@ public class HomeActivity extends AppCompatActivity {
         });
 
     }
-/**
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        ActionBar actionBar = getSupportActionBar();
+    /**
+     @Override
+     public boolean onCreateOptionsMenu(Menu menu) {
+     ActionBar actionBar = getSupportActionBar();
 
-        // Custom Actionbar
-        actionBar.setDisplayShowCustomEnabled(true);
-        //actionBar.setDisplayHomeAsUpEnabled(false); //액션바 아이콘을 업 네비게이션 형태로 표시
-        //actionBar.setDisplayShowTitleEnabled(false); //액션바에 표시되는 제목 표시유무
-        //actionBar.setDisplayShowHomeEnabled(false); //홈 아이콘을 숨김처리
+     // Custom Actionbar
+     actionBar.setDisplayShowCustomEnabled(true);
+     //actionBar.setDisplayHomeAsUpEnabled(false); //액션바 아이콘을 업 네비게이션 형태로 표시
+     //actionBar.setDisplayShowTitleEnabled(false); //액션바에 표시되는 제목 표시유무
+     //actionBar.setDisplayShowHomeEnabled(false); //홈 아이콘을 숨김처리
 
-        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-        View actionbar = inflater.inflate(R.layout.custom_title, null);
+     LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+     View actionbar = inflater.inflate(R.layout.custom_title, null);
 
 
-        actionBar.setCustomView(actionbar);
-        return true;
-    }
+     actionBar.setCustomView(actionbar);
+     return true;
+     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.btn_Back :
-                onBackPressed();
-                return true ;
-            case R.id.btn_Profile:
-                // 프로필
-                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
-            default :
-                return super.onOptionsItemSelected(item) ;
-        }
-    }
-**/
+     @Override
+     public boolean onOptionsItemSelected(MenuItem item) {
+     switch (item.getItemId()) {
+     case R.id.btn_Back :
+     onBackPressed();
+     return true ;
+     case R.id.btn_Profile:
+     // 프로필
+     Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+     default :
+     return super.onOptionsItemSelected(item) ;
+     }
+     }
+     **/
 
     private void init(ArrayList<String> itemList) {
 
@@ -477,29 +474,17 @@ public class HomeActivity extends AppCompatActivity {
         mChild = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-<<<<<<< HEAD
                 // Toast.makeText(HomeActivity.this, keyword.getText().toString() + "추가 완료", Toast.LENGTH_SHORT).show();
-=======
-                //Toast.makeText(HomeActivity.this, keyword.getText().toString() + "추가 완료", Toast.LENGTH_SHORT).show();
->>>>>>> 911db120523a7e3d294022feb873ced3c8d346c7
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-<<<<<<< HEAD
                 // Toast.makeText(HomeActivity.this,  "데이터가 변경되었습니다.", Toast.LENGTH_SHORT).show();
-=======
-                //Toast.makeText(HomeActivity.this,  "데이터가 변경되었습니다.", Toast.LENGTH_SHORT).show();
->>>>>>> 911db120523a7e3d294022feb873ced3c8d346c7
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-<<<<<<< HEAD
                 // Toast.makeText(HomeActivity.this,  "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-=======
-                //Toast.makeText(HomeActivity.this,  "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
->>>>>>> 911db120523a7e3d294022feb873ced3c8d346c7
             }
 
             @Override
@@ -540,6 +525,11 @@ public class HomeActivity extends AppCompatActivity {
     private void insertKeyword(){
         String word = keyword.getText().toString();
         // 정규식 기반 예외처리 필요 (한, 영 숫자? 정도)됨
+        getImageFromStorage();
+        if(word.length() == 0){
+            Toast.makeText(HomeActivity.this, "값을 입력해주세요!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String regex = "^[a-zA-Z0-9가-힣]*$";
         if (Pattern.matches(regex, word)){
             // 공백은 예외적으로 자동 처리되어야하나?
@@ -584,7 +574,8 @@ public class HomeActivity extends AppCompatActivity {
         Button btn = findViewById(R.id.testBtn);
         testImgView = (ImageView) findViewById(R.id.testImgView);
         FirebaseStorage storage = FirebaseStorage.getInstance(); // FirebaseStorage 인스턴스 생성
-        StorageReference storageRef = storage.getReference("테스트폴더/사과.jpg"); // 스토리지 공간을 참조해서 이미지를 가져옴
+        System.out.println(appState.getMeaningOutInfo().get("119레오").getLogoRef());
+        StorageReference storageRef = storage.getReference(appState.getMeaningOutInfo().get("119레오").getLogoRef()); // 스토리지 공간을 참조해서 이미지를 가져옴
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

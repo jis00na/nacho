@@ -1,9 +1,5 @@
 package com.example.nachos;
 
-<<<<<<< HEAD
-=======
-/*
->>>>>>> 911db120523a7e3d294022feb873ced3c8d346c7
 import android.content.Context;
 
 import com.bumptech.glide.Glide;
@@ -22,8 +18,4 @@ public final class MyAppGlideModule extends AppGlideModule {
     public void registerComponents(Context context, Glide glide, Registry registry) {
         registry.append(StorageReference.class, InputStream.class, new FirebaseImageLoader.Factory());
     }
-<<<<<<< HEAD
 }
-=======
-}*/
->>>>>>> 911db120523a7e3d294022feb873ced3c8d346c7
