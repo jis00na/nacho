@@ -1,5 +1,6 @@
 package com.example.nachos;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> implements OnProductItemClickListener{
     ArrayList<Product> items = new ArrayList<Product>();
     OnProductItemClickListener listener;
-
 
     @NonNull
     @Override
@@ -27,6 +29,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product item = items.get(position);
+
+        View.OnClickListener gotosite;
+        gotosite = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(), Webview.class);
+                intent.putExtra("url", item.getUrl());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        };
+
+        holder.imageView.setOnClickListener(gotosite);
+        Glide.with(holder.itemView.getContext())
+                .load(item.getRef())
+                .override(1000)
+                .into(holder.imageView); // Glide를 사용하여 이미지 로드
+
+        holder.textNote.setText(item.getIntroduction());
+        holder.textName.setText(item.getSite());
+        holder.textCost.setText(item.getProductName());
+
         holder.setItem(item);
     }
 
@@ -63,8 +86,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         TextView textCost;
         TextView textNote;
 
-
-
         public ViewHolder(View itemView, final OnProductItemClickListener listener){
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
@@ -85,10 +106,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         }
 
         public void setItem(Product item){
-            textNote.setText(item.getNotification());
-            textName.setText(item.getName());
-            textCost.setText(item.getCost());
-            imageView.setImageResource(item.getPic());
+            textNote.setText(item.getIntroduction());
+            textName.setText(item.getSite());
+            textCost.setText(item.getProductName());
         }
     }
 }

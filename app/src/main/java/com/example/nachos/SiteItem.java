@@ -3,6 +3,11 @@ package com.example.nachos;
 
 import android.net.Uri;
 import android.view.View;
+
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,8 +41,15 @@ public class SiteItem {
     String site;
     String category;
     String logo;
+    String url;
     int resId;
     View.OnClickListener gotosite;
+    StorageReference ref;
+    private WebView mWebView;
+
+    //FirebaseStorage storage = FirebaseStorage.getInstance();
+    //private ApplicationState appState;
+    //StorageReference storageRef = storage.getReference(appState.getMeaningOutInfo().get("119레오").getDownloadUrl());
 
 
 
@@ -52,13 +64,32 @@ public class SiteItem {
         this.category = category;
         this.resId = resId;
     }*/
-    public SiteItem(String site, String category, String logo) {
+
+    public SiteItem(String site, String category, String logo, String url, StorageReference ref) {
         this.site = site;
         this.category = category;
         this.logo = logo;
+        this.url = url;
+        this.ref = ref;
     }
 
     //변수에 접근할 때 .OO 접근하기보다는 안전하게 getter, setter를 이용합니다.
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public StorageReference getRef() {
+        return ref;
+    }
+
+    public void setRef(StorageReference ref) {
+        this.ref = ref;
+    }
+
     public String getSite() {
         return site;
     }

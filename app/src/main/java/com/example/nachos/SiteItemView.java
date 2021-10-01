@@ -9,28 +9,12 @@ import android.widget.TextView;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.StorageReference;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FileDownloadTask;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.geo.type.Viewport;
-import java.util.concurrent.atomic.AtomicMarkableReference;
+
 
 public class SiteItemView extends LinearLayout {
 
@@ -67,11 +51,12 @@ public class SiteItemView extends LinearLayout {
     public void setCategory(String category){
         textView2.setText(category);
     }
-    /*
-    public void setImage(String logo){
-        imageView.setImageResource(logo);
-    }*/
-    public void setImage(String logo){Glide.with(this).load("").into(imageView);}
+
+    public void setImage(StorageReference ref){
+        // Reference 까지 인자로?
+        // view == ?
+        Glide.with(this).load(ref).override(1000).into(imageView); // Glide를 사용하여 이미지 로드
+    } // 여기에 글라이드
     public void setButton(OnClickListener gotosite){
         button.setOnClickListener(gotosite);
     }

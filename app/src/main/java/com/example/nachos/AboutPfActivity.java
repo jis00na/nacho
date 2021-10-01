@@ -12,12 +12,45 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class AboutPfActivity extends AppCompatActivity{
+
+    private ApplicationState appState;
+
+    @Override
+    protected void onStop() {//5
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            appState.saveScoreToFirebase();
+        }
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {//6
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            appState.saveScoreToFirebase();
+        }
+        super.onDestroy();
+    }
+
+    private void clickCount(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            System.out.println(user.getEmail());
+            appState.setScore(appState.getScore() + 1);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_pf);
+        appState = (ApplicationState) getApplication();
 
         Button title_back, title_prof; // 상단 타이틀
         Button home, cate, prod, stor; // 상단 탑뷰
@@ -44,6 +77,7 @@ public class AboutPfActivity extends AppCompatActivity{
         content_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, AboutUpActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -53,6 +87,7 @@ public class AboutPfActivity extends AppCompatActivity{
         content_do.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, AboutDoActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -63,6 +98,7 @@ public class AboutPfActivity extends AppCompatActivity{
         title_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 onBackPressed();
                 overridePendingTransition(0, 0);
             }
@@ -71,7 +107,21 @@ public class AboutPfActivity extends AppCompatActivity{
         title_prof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null){
+                    // User is signed in
+                    System.out.println(user.getEmail());
+                    appState.setScore(appState.getScore() + 1);
+                    System.out.println(appState.getScore());
+                    Intent intent = new Intent(AboutPfActivity.this, MypageActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }else{
+                    // No user is signed in
+                    Intent intent = new Intent(AboutPfActivity.this, AboutGoogleLogin.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
             }
         });
 
@@ -79,6 +129,7 @@ public class AboutPfActivity extends AppCompatActivity{
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, HomeActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -88,6 +139,7 @@ public class AboutPfActivity extends AppCompatActivity{
         cate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, CategoryActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -97,6 +149,7 @@ public class AboutPfActivity extends AppCompatActivity{
         prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, ProductActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -106,6 +159,7 @@ public class AboutPfActivity extends AppCompatActivity{
         stor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, SiteActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -116,6 +170,7 @@ public class AboutPfActivity extends AppCompatActivity{
         hash_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, AboutUpActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -125,6 +180,7 @@ public class AboutPfActivity extends AppCompatActivity{
         hash_ve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, AboutVeActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -134,6 +190,7 @@ public class AboutPfActivity extends AppCompatActivity{
         hash_ft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, AboutFtActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -143,6 +200,7 @@ public class AboutPfActivity extends AppCompatActivity{
         hash_do.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, AboutDoActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -152,6 +210,7 @@ public class AboutPfActivity extends AppCompatActivity{
         hash_aw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, AboutAnActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -161,6 +220,7 @@ public class AboutPfActivity extends AppCompatActivity{
         hash_pf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, AboutPfActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -172,6 +232,7 @@ public class AboutPfActivity extends AppCompatActivity{
         pfsite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutPfActivity.this, SiteActivity.class);
                 intent.putExtra("frompf","frompf");
                 startActivity(intent);
