@@ -4,6 +4,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.Intent;
 import android.net.Uri;
@@ -83,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
 
     // Realtime DB Event Listener
     private ChildEventListener mChild;
-
+    private int count = 0;
     // should parse to json
     private StoreManager storeManager;
     private String siteInfo;
@@ -92,6 +94,67 @@ public class HomeActivity extends AppCompatActivity {
 
     private ImageView testImgView;
 
+    //count
+    private int counter;
+    private int counter_cate;
+    private int counter_h;
+    private String score_h;
+    private int score_h1;
+    @Override
+    protected void onStop() {//5
+        //Toast.makeText(getApplicationContext(),"onStop 호출됨",Toast.LENGTH_SHORT).show();
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {//6
+        //Toast.makeText(getApplicationContext(),"onDestroy 호출됨",Toast.LENGTH_SHORT).show();
+        savescore();
+        super.onDestroy();
+        databaseReference.removeEventListener(mChild);
+    }
+
+    @Override
+    protected void onPause() {//4
+        //Toast.makeText(getApplicationContext(),"onPause 호출됨",Toast.LENGTH_SHORT).show();
+        savescore(); //앱이 도중에 잘못되어도 저장됨
+        super.onPause();
+    }
+
+    //데이터 저장
+//SharedPreferences는 해당 프로세스(어플리케이션)내에 File 형태로 Data를 저장해
+//해당 어플리케이션이 삭제되기 전까지 Data를 보관해 주는 기능
+//SharedPreferences 사용한 어플리케이션을 지우면 내용이 모두 삭제 됩니다. File이 삭제되는 것이지요.
+    private void savescore(){
+        SharedPreferences pref = getSharedPreferences("gostop", Activity.MODE_PRIVATE); //"gostop"은 SharedPreferences 이름. 여러개가 있을 수 있음
+        SharedPreferences.Editor edit = pref.edit(); //만들어서 저장
+        edit.putString("score_h", String.valueOf(counter_h)); //종료해도 저장됨
+        edit.commit(); //저장은 필수
+    }
+
+    @Override
+    protected void onResume() {//3
+        //Toast.makeText(getApplicationContext(),"onResume 호출됨",Toast.LENGTH_SHORT).show();
+        loadscore();
+        super.onResume();
+    }
+
+    //데이터 호출
+    private void loadscore(){
+        SharedPreferences pref = getSharedPreferences("gostop", Activity.MODE_PRIVATE); //불러올때 설정한 이름을 불러와야해
+        score_h = pref.getString("score_h","0"); //값이 없을 때 0을 기본값으로 넣겠다.(기본값)
+        Toast.makeText(getApplicationContext(),"점수 : "+score_h ,Toast.LENGTH_SHORT).show();
+        //tv_count.setText(String.valueOf(score) +"도");
+        System.out.println(score_h + "도");
+        savescore();
+    }
+
+    @Override
+    protected void onStart() {//2
+        //Toast.makeText(getApplicationContext(),"onStart 호출됨",Toast.LENGTH_SHORT).show();
+        savescore();
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +162,13 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         this.initializeData();
 
+        Intent intent = getIntent();
+        counter = intent.getIntExtra("counter",0);
+        counter_cate = intent.getIntExtra("counter_cate",0);
+
+        SharedPreferences prefs = getSharedPreferences("counter_alone", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        counter_h = prefs.getInt("counter_h", 0);
         /*
         Button btn = findViewById(R.id.testBtn);
         ImageView testImgView = (ImageView) findViewById(R.id.testImgView);
@@ -121,7 +191,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // 처음 시작하면 키워드 사이 간격 null - decoration 호출하여 간격 5 추가
         // 처음만 호출하면
-        if(decoration ==null){
+        if(decoration == null){
             decoration = new MyListDecoration();
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -188,9 +258,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, AboutGoogleLogin.class);
+                Intent intent = new Intent(HomeActivity.this, CountActivity.class);
+                score_h1 =  Integer.valueOf(score_h1);
+                System.out.println("score_h1"+score_h1);
+                intent.putExtra("counter_h",score_h1);
+                intent.putExtra("counter",counter);
+                intent.putExtra("counter_cate",counter_cate);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
+
             }
         });
 
@@ -236,7 +312,15 @@ public class HomeActivity extends AppCompatActivity {
         hash_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                counter_h++;
+                editor.putInt("counter_h", counter_h);
+                editor.apply();
+
                 Intent intent = new Intent(HomeActivity.this, AboutUpActivity.class);
+                score_h1 =  Integer.valueOf(score_h);
+                System.out.println("score_h1"+score_h1);
+                intent.putExtra("counter_h",score_h1);
+
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -245,7 +329,14 @@ public class HomeActivity extends AppCompatActivity {
         hash_ve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                counter_h++;
+                editor.putInt("counter_h", counter_h);
+                editor.apply();
+
                 Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
+                score_h1 =  Integer.valueOf(score_h);
+                System.out.println("score_h1"+score_h1);
+                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -254,7 +345,14 @@ public class HomeActivity extends AppCompatActivity {
         hash_ft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                counter_h++;
+                editor.putInt("counter_h", counter_h);
+                editor.apply();
+
                 Intent intent = new Intent(HomeActivity.this, AboutFtActivity.class);
+                score_h1 =  Integer.valueOf(score_h);
+                System.out.println("score_h1"+score_h1);
+                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -263,7 +361,14 @@ public class HomeActivity extends AppCompatActivity {
         hash_do.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                counter_h++;
+                editor.putInt("counter_h", counter_h);
+                editor.apply();
+
                 Intent intent = new Intent(HomeActivity.this, AboutDoActivity.class);
+                score_h1 =  Integer.valueOf(score_h);
+                System.out.println("score_h1"+score_h1);
+                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -272,7 +377,14 @@ public class HomeActivity extends AppCompatActivity {
         hash_aw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                counter_h++;
+                editor.putInt("counter_h", counter_h);
+                editor.apply();
+
                 Intent intent = new Intent(HomeActivity.this, AboutAnActivity.class);
+                score_h1 =  Integer.valueOf(score_h);
+                System.out.println("score_h1"+score_h1);
+                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -281,7 +393,14 @@ public class HomeActivity extends AppCompatActivity {
         hash_pf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                counter_h++;
+                editor.putInt("counter_h", counter_h);
+                editor.apply();
+
                 Intent intent = new Intent(HomeActivity.this, AboutPfActivity.class);
+                score_h1 =  Integer.valueOf(score_h);
+                System.out.println("score_h1"+score_h1);
+                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -291,20 +410,20 @@ public class HomeActivity extends AppCompatActivity {
         aboutpf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                counter_h++;
+                editor.putInt("counter_h", counter_h);
+                editor.apply();
+
                 Intent intent = new Intent(HomeActivity.this, AboutPfActivity.class);
+                score_h1 =  Integer.valueOf(score_h);
+                System.out.println("score_h1"+score_h1);
+                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
         });
 
-        aboutve.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-            }
-        });
+
 
         // About 비건 페이지 이동
         aboutve.setOnClickListener(new View.OnClickListener() {
@@ -313,6 +432,18 @@ public class HomeActivity extends AppCompatActivity {
                 Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
+                @Override
+                public void onClick(View v) {
+                    counter_h++;
+                    editor.putInt("counter_h", counter_h);
+                    editor.apply();
+
+                    Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
+                    score_h1 =  Integer.valueOf(score_h);
+                    System.out.println("score_h1"+score_h1);
+                    intent.putExtra("counter_h",score_h1);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
             }
         });
 
@@ -370,9 +501,11 @@ public class HomeActivity extends AppCompatActivity {
         add_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                count+=1;
                 insertKeyword();
                 init(meaningOutKeywordList); // 버튼 누르면 init()호출
                 hideKeyboard();
+
             }
         });
 
@@ -470,6 +603,7 @@ public class HomeActivity extends AppCompatActivity {
         storeManager = new StoreManager(siteInfo);
     }
 
+
     private void initDatabase() {
         mChild = new ChildEventListener() {
             @Override
@@ -543,11 +677,8 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        databaseReference.removeEventListener(mChild);
-    }
+
+
 
     private String getJsonString()
     {

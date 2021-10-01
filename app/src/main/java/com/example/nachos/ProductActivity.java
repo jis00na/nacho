@@ -43,7 +43,7 @@ public class ProductActivity extends AppCompatActivity{
         title_prof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProductActivity.this, MypageActivity.class);
+                Intent intent = new Intent(ProductActivity.this, AboutGoogleLogin.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }

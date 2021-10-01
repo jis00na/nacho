@@ -27,6 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CountActivity" />
+        <activity
+            android:name=".AboutGoogleLogin"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".SiteActivity"
             android:exported="true"
@@ -36,7 +41,7 @@
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".AboutGoogleLogin"
+            android:name=".StartActivity"
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity

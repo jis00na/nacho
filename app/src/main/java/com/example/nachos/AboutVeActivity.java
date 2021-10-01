@@ -195,19 +195,22 @@ public class AboutVeActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        adapter.addItem(new Product("사이트", "비건" , "제품명", R.drawable.aboutve));
-        adapter.addItem(new Product("사이트", "비건" , "제품명", R.drawable.aboutve));
+
+        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
 
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new OnProductItemClickListener() {
             @Override
             public void onItemClick(ProductAdapter.ViewHolder holder, View view, int position) {
                 Product item = adapter.getItem(position);
-                Toast.makeText(getApplicationContext(), "이름 : " + item.getName() + "\n 가격 : " + item.getCost() +
-                        "\n 설명 : " + item.getNotification(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "이름 : " + item.getName() + "\n 가격 : " + item.getCost() +"\n 설명 : " + item.getNotification(),Toast.LENGTH_LONG).show();
             }
-        }); */
+        });
 
 
     }
