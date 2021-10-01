@@ -18,10 +18,14 @@ import android.widget.Toast;
 
 import static java.sql.DriverManager.println;
 
+import com.bumptech.glide.Glide;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SiteActivity extends AppCompatActivity {
+
+    private ApplicationState appState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,8 +194,12 @@ public class SiteActivity extends AppCompatActivity {
         ListView listView_up = findViewById(R.id.SiteList_up);
         ListView listView_ve = findViewById(R.id.SiteList_ve);
 
+        // 제품 추가
+        appState = (ApplicationState) getApplication();
+
         SiteAdapter adapter = new SiteAdapter();
-        adapter.addItem(new SiteItem("프라이탁", "업사이클링",R.drawable.back_animal));
+        adapter.addItem(new SiteItem("프라이탁", "업사이클링", R.drawable.back_animal));
+
         listView.setAdapter(adapter);
         listView2.setAdapter(adapter);
         listView_ani.setAdapter(adapter);

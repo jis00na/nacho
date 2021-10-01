@@ -8,9 +8,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -36,7 +39,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,6 +51,10 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.geo.type.Viewport;
@@ -71,6 +81,8 @@ public class HomeActivity extends AppCompatActivity {
     // meaningOut Keyword List
     private ArrayList<String> meaningOutKeywordList = new ArrayList<String>();
 
+    private ApplicationState appState;
+
     // Realtime DB Event Listener
     private ChildEventListener mChild;
     private int count = 0;
@@ -79,6 +91,8 @@ public class HomeActivity extends AppCompatActivity {
     private String siteInfo;
     //MyListDecoration decoration = new MyListDecoration();
     MyListDecoration decoration;
+
+    private ImageView testImgView;
 
     //count
     private int counter;
@@ -107,10 +121,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    //데이터 저장
-//SharedPreferences는 해당 프로세스(어플리케이션)내에 File 형태로 Data를 저장해
-//해당 어플리케이션이 삭제되기 전까지 Data를 보관해 주는 기능
-//SharedPreferences 사용한 어플리케이션을 지우면 내용이 모두 삭제 됩니다. File이 삭제되는 것이지요.
+    // 데이터 저장
+    // SharedPreferences는 해당 프로세스(어플리케이션)내에 File 형태로 Data를 저장해
+    // 해당 어플리케이션이 삭제되기 전까지 Data를 보관해 주는 기능
+    // SharedPreferences 사용한 어플리케이션을 지우면 내용이 모두 삭제 됩니다. File이 삭제되는 것이지요.
     private void savescore(){
         SharedPreferences pref = getSharedPreferences("gostop", Activity.MODE_PRIVATE); //"gostop"은 SharedPreferences 이름. 여러개가 있을 수 있음
         SharedPreferences.Editor edit = pref.edit(); //만들어서 저장
@@ -173,6 +187,7 @@ public class HomeActivity extends AppCompatActivity {
         // custom title bar
         //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         //getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.custom_title);
+        testImgView = (ImageView)findViewById(R.id.testImgView);
 
         // 처음 시작하면 키워드 사이 간격 null - decoration 호출하여 간격 5 추가
         // 처음만 호출하면
@@ -190,7 +205,7 @@ public class HomeActivity extends AppCompatActivity {
 
         // first setting
         dataSetting();
-        storeManager.init();
+//        storeManager.init();
         storeManager.getData();
 
         // initialize DB
@@ -199,6 +214,9 @@ public class HomeActivity extends AppCompatActivity {
         // load keyword data
         loadKeyword();
         init(meaningOutKeywordList);
+
+        // Load Global Data
+        appState = (ApplicationState) getApplication();
 
         ViewPager viewPager = findViewById(R.id.viewPager);
         viewPager.setClipToPadding(false);
@@ -409,20 +427,21 @@ public class HomeActivity extends AppCompatActivity {
 
         // About 비건 페이지 이동
         aboutve.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    counter_h++;
-                    editor.putInt("counter_h", counter_h);
-                    editor.apply();
+            @Override
+            public void onClick(View v) {
+                counter_h++;
+                editor.putInt("counter_h", counter_h);
+                editor.apply();
 
-                    Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
-                    score_h1 =  Integer.valueOf(score_h);
-                    System.out.println("score_h1"+score_h1);
-                    intent.putExtra("counter_h",score_h1);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
+                Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
+                score_h1 =  Integer.valueOf(score_h);
+                System.out.println("score_h1"+score_h1);
+                intent.putExtra("counter_h",score_h1);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
+
 
         float density = getResources().getDisplayMetrics().density;
         int margin = (int) (DP * density);
@@ -475,7 +494,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
         add_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -485,51 +503,42 @@ public class HomeActivity extends AppCompatActivity {
                 hideKeyboard();
 
             }
-
-
-
         });
 
-
-
-
-
-
-
     }
-/**
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        ActionBar actionBar = getSupportActionBar();
+    /**
+     @Override
+     public boolean onCreateOptionsMenu(Menu menu) {
+     ActionBar actionBar = getSupportActionBar();
 
-        // Custom Actionbar
-        actionBar.setDisplayShowCustomEnabled(true);
-        //actionBar.setDisplayHomeAsUpEnabled(false); //액션바 아이콘을 업 네비게이션 형태로 표시
-        //actionBar.setDisplayShowTitleEnabled(false); //액션바에 표시되는 제목 표시유무
-        //actionBar.setDisplayShowHomeEnabled(false); //홈 아이콘을 숨김처리
+     // Custom Actionbar
+     actionBar.setDisplayShowCustomEnabled(true);
+     //actionBar.setDisplayHomeAsUpEnabled(false); //액션바 아이콘을 업 네비게이션 형태로 표시
+     //actionBar.setDisplayShowTitleEnabled(false); //액션바에 표시되는 제목 표시유무
+     //actionBar.setDisplayShowHomeEnabled(false); //홈 아이콘을 숨김처리
 
-        LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-        View actionbar = inflater.inflate(R.layout.custom_title, null);
+     LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+     View actionbar = inflater.inflate(R.layout.custom_title, null);
 
 
-        actionBar.setCustomView(actionbar);
-        return true;
-    }
+     actionBar.setCustomView(actionbar);
+     return true;
+     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.btn_Back :
-                onBackPressed();
-                return true ;
-            case R.id.btn_Profile:
-                // 프로필
-                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
-            default :
-                return super.onOptionsItemSelected(item) ;
-        }
-    }
-**/
+     @Override
+     public boolean onOptionsItemSelected(MenuItem item) {
+     switch (item.getItemId()) {
+     case R.id.btn_Back :
+     onBackPressed();
+     return true ;
+     case R.id.btn_Profile:
+     // 프로필
+     Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+     default :
+     return super.onOptionsItemSelected(item) ;
+     }
+     }
+     **/
 
     private void init(ArrayList<String> itemList) {
 
@@ -553,8 +562,6 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     };
-
-
 
 
     private void hideKeyboard() {
@@ -595,17 +602,17 @@ public class HomeActivity extends AppCompatActivity {
         mChild = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Toast.makeText(HomeActivity.this, keyword.getText().toString() + "추가 완료", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(HomeActivity.this, keyword.getText().toString() + "추가 완료", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Toast.makeText(HomeActivity.this,  "데이터가 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(HomeActivity.this,  "데이터가 변경되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Toast.makeText(HomeActivity.this,  "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(HomeActivity.this,  "데이터가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -646,6 +653,7 @@ public class HomeActivity extends AppCompatActivity {
     private void insertKeyword(){
         String word = keyword.getText().toString();
         // 정규식 기반 예외처리 필요 (한, 영 숫자? 정도)됨
+        getImageFromStorage();
         if(word.length() == 0){
             Toast.makeText(HomeActivity.this, "값을 입력해주세요!", Toast.LENGTH_SHORT).show();
             return;
@@ -687,4 +695,26 @@ public class HomeActivity extends AppCompatActivity {
         return json;
     }
 
+    private void getImageFromStorage(){
+        Button btn = findViewById(R.id.testBtn);
+        testImgView = (ImageView) findViewById(R.id.testImgView);
+        FirebaseStorage storage = FirebaseStorage.getInstance(); // FirebaseStorage 인스턴스 생성
+        System.out.println(appState.getMeaningOutInfo().get("119레오").getLogoRef());
+        StorageReference storageRef = storage.getReference(appState.getMeaningOutInfo().get("119레오").getLogoRef()); // 스토리지 공간을 참조해서 이미지를 가져옴
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Glide.with(view).load(storageRef).override(1000).into(testImgView); // Glide를 사용하여 이미지 로드
+//                storageRef.getDownloadUrl().addOnCompleteListener(task -> {
+//                    if (task.isSuccessful()){
+//                        Glide.with(getApplicationContext() /* context */)
+//                                .load(storageRef)
+//                                .into(testImgView);
+//                    }else{
+//                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+            }
+        });
+    }
 }

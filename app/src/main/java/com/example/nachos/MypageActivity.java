@@ -2,6 +2,7 @@ package com.example.nachos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Bundle;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -76,7 +77,6 @@ public class MypageActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
-
 
     }
 }
