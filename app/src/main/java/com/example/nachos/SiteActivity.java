@@ -198,7 +198,7 @@ public class SiteActivity extends AppCompatActivity {
         appState = (ApplicationState) getApplication();
 
         SiteAdapter adapter = new SiteAdapter();
-        adapter.addItem(new SiteItem("프라이탁", "업사이클링", R.drawable.back_animal));
+        adapter.addItem(new SiteItem("프라이탁", "업사이클링", "hi"));
 
         listView.setAdapter(adapter);
         listView2.setAdapter(adapter);
@@ -301,7 +301,7 @@ public class SiteActivity extends AppCompatActivity {
             SiteItem item = items.get(position);
             siteItemView.setSite(item.getSite());
             siteItemView.setCategory(item.getCategory());
-            siteItemView.setImage(item.getResId());
+            //siteItemView.setImage(item.getResId());
             siteItemView.setButton(item.getGotosite());
             return siteItemView;
         }

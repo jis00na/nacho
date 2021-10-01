@@ -64,8 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Home"
-            android:textColor="#F89318"
-            android:background="#92D0D0D0"
+            android:textColor="#FFFFFF"
+            android:background="#BEDDB9"
             android:textStyle="bold"
             tools:ignore="MissingConstraints" />
 
