@@ -121,10 +121,10 @@ public class HomeActivity extends AppCompatActivity {
         super.onPause();
     }
 
-    //데이터 저장
-//SharedPreferences는 해당 프로세스(어플리케이션)내에 File 형태로 Data를 저장해
-//해당 어플리케이션이 삭제되기 전까지 Data를 보관해 주는 기능
-//SharedPreferences 사용한 어플리케이션을 지우면 내용이 모두 삭제 됩니다. File이 삭제되는 것이지요.
+    // 데이터 저장
+    // SharedPreferences는 해당 프로세스(어플리케이션)내에 File 형태로 Data를 저장해
+    // 해당 어플리케이션이 삭제되기 전까지 Data를 보관해 주는 기능
+    // SharedPreferences 사용한 어플리케이션을 지우면 내용이 모두 삭제 됩니다. File이 삭제되는 것이지요.
     private void savescore(){
         SharedPreferences pref = getSharedPreferences("gostop", Activity.MODE_PRIVATE); //"gostop"은 SharedPreferences 이름. 여러개가 있을 수 있음
         SharedPreferences.Editor edit = pref.edit(); //만들어서 저장
@@ -429,23 +429,19 @@ public class HomeActivity extends AppCompatActivity {
         aboutve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                counter_h++;
+                editor.putInt("counter_h", counter_h);
+                editor.apply();
+
                 Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
+                score_h1 =  Integer.valueOf(score_h);
+                System.out.println("score_h1"+score_h1);
+                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
-                @Override
-                public void onClick(View v) {
-                    counter_h++;
-                    editor.putInt("counter_h", counter_h);
-                    editor.apply();
-
-                    Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
-                    score_h1 =  Integer.valueOf(score_h);
-                    System.out.println("score_h1"+score_h1);
-                    intent.putExtra("counter_h",score_h1);
-                    startActivity(intent);
-                    overridePendingTransition(0, 0);
             }
         });
+
 
         float density = getResources().getDisplayMetrics().density;
         int margin = (int) (DP * density);
@@ -566,8 +562,6 @@ public class HomeActivity extends AppCompatActivity {
 
         }
     };
-
-
 
 
     private void hideKeyboard() {
