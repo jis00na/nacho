@@ -12,11 +12,45 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.os.Bundle;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class AboutVeActivity extends AppCompatActivity {
+
+    private ApplicationState appState;
+
+    @Override
+    protected void onStop() {//5
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            appState.saveScoreToFirebase();
+        }
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {//6
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            appState.saveScoreToFirebase();
+        }
+        super.onDestroy();
+    }
+
+    private void clickCount(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            System.out.println(user.getEmail());
+            appState.setScore(appState.getScore() + 1);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_ve);
+        appState = (ApplicationState) getApplication();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
@@ -49,6 +83,7 @@ public class AboutVeActivity extends AppCompatActivity {
         content_ft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, AboutFtActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -58,6 +93,7 @@ public class AboutVeActivity extends AppCompatActivity {
         content_pf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, AboutPfActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -70,6 +106,7 @@ public class AboutVeActivity extends AppCompatActivity {
         title_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 onBackPressed();
                 overridePendingTransition(0, 0);
             }
@@ -78,7 +115,21 @@ public class AboutVeActivity extends AppCompatActivity {
         title_prof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null){
+                    // User is signed in
+                    System.out.println(user.getEmail());
+                    appState.setScore(appState.getScore() + 1);
+                    System.out.println(appState.getScore());
+                    Intent intent = new Intent(AboutVeActivity.this, MypageActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }else{
+                    // No user is signed in
+                    Intent intent = new Intent(AboutVeActivity.this, AboutGoogleLogin.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
             }
         });
 
@@ -86,6 +137,7 @@ public class AboutVeActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, HomeActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -95,6 +147,7 @@ public class AboutVeActivity extends AppCompatActivity {
         cate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, CategoryActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -104,6 +157,7 @@ public class AboutVeActivity extends AppCompatActivity {
         prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, ProductActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -113,6 +167,7 @@ public class AboutVeActivity extends AppCompatActivity {
         stor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, SiteActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -123,6 +178,7 @@ public class AboutVeActivity extends AppCompatActivity {
         hash_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, AboutUpActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -132,6 +188,7 @@ public class AboutVeActivity extends AppCompatActivity {
         hash_ve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, AboutVeActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -141,6 +198,7 @@ public class AboutVeActivity extends AppCompatActivity {
         hash_ft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, AboutFtActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -150,6 +208,7 @@ public class AboutVeActivity extends AppCompatActivity {
         hash_do.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, AboutDoActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -159,6 +218,7 @@ public class AboutVeActivity extends AppCompatActivity {
         hash_aw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, AboutAnActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -168,6 +228,7 @@ public class AboutVeActivity extends AppCompatActivity {
         hash_pf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, AboutPfActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -179,6 +240,7 @@ public class AboutVeActivity extends AppCompatActivity {
         veproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent1 = new Intent(AboutVeActivity.this, SiteActivity.class);
                 startActivity(intent1);
             }
@@ -189,6 +251,7 @@ public class AboutVeActivity extends AppCompatActivity {
         vesite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(AboutVeActivity.this, SiteActivity.class);
                 intent.putExtra("fromvegan","fromvegan");
                 startActivity(intent);
@@ -196,17 +259,18 @@ public class AboutVeActivity extends AppCompatActivity {
         });
 
 
-        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
 
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new OnProductItemClickListener() {
             @Override
             public void onItemClick(ProductAdapter.ViewHolder holder, View view, int position) {
+                clickCount();
                 Product item = adapter.getItem(position);
                 //Toast.makeText(getApplicationContext(), "이름 : " + item.getName() + "\n 가격 : " + item.getCost() +"\n 설명 : " + item.getNotification(),Toast.LENGTH_LONG).show();
             }

@@ -44,6 +44,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
@@ -100,25 +102,33 @@ public class HomeActivity extends AppCompatActivity {
     private int counter_h;
     private String score_h;
     private int score_h1;
+
     @Override
     protected void onStop() {//5
-        //Toast.makeText(getApplicationContext(),"onStop 호출됨",Toast.LENGTH_SHORT).show();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            appState.saveScoreToFirebase();
+        }
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {//6
-        //Toast.makeText(getApplicationContext(),"onDestroy 호출됨",Toast.LENGTH_SHORT).show();
-        savescore();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            appState.saveScoreToFirebase();
+        }
         super.onDestroy();
         databaseReference.removeEventListener(mChild);
     }
 
-    @Override
-    protected void onPause() {//4
-        //Toast.makeText(getApplicationContext(),"onPause 호출됨",Toast.LENGTH_SHORT).show();
-        savescore(); //앱이 도중에 잘못되어도 저장됨
-        super.onPause();
+    private void clickCount(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // User is signed in
+            System.out.println(user.getEmail());
+            appState.setScore(appState.getScore() + 1);
+        }
     }
 
     // 데이터 저장
@@ -135,7 +145,6 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {//3
         //Toast.makeText(getApplicationContext(),"onResume 호출됨",Toast.LENGTH_SHORT).show();
-        loadscore();
         super.onResume();
     }
 
@@ -151,8 +160,6 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {//2
-        //Toast.makeText(getApplicationContext(),"onStart 호출됨",Toast.LENGTH_SHORT).show();
-        savescore();
         super.onStart();
     }
 
@@ -249,6 +256,7 @@ public class HomeActivity extends AppCompatActivity {
         title_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 onBackPressed();
                 overridePendingTransition(0, 0);
             }
@@ -257,16 +265,21 @@ public class HomeActivity extends AppCompatActivity {
         title_prof.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "프로필", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(HomeActivity.this, CountActivity.class);
-                score_h1 =  Integer.valueOf(score_h1);
-                System.out.println("score_h1"+score_h1);
-                intent.putExtra("counter_h",score_h1);
-                intent.putExtra("counter",counter);
-                intent.putExtra("counter_cate",counter_cate);
-                startActivity(intent);
-                overridePendingTransition(0, 0);
-
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null){
+                    // User is signed in
+                    System.out.println(user.getEmail());
+                    appState.setScore(appState.getScore() + 1);
+                    System.out.println(appState.getScore());
+                    Intent intent = new Intent(HomeActivity.this, MypageActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }else{
+                    // No user is signed in
+                    Intent intent = new Intent(HomeActivity.this, AboutGoogleLogin.class);
+                    startActivity(intent);
+                    overridePendingTransition(0, 0);
+                }
             }
         });
 
@@ -275,6 +288,7 @@ public class HomeActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, HomeActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -284,6 +298,7 @@ public class HomeActivity extends AppCompatActivity {
         cate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, CategoryActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -293,6 +308,7 @@ public class HomeActivity extends AppCompatActivity {
         prod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, ProductActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -302,6 +318,7 @@ public class HomeActivity extends AppCompatActivity {
         stor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, SiteActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
@@ -312,15 +329,8 @@ public class HomeActivity extends AppCompatActivity {
         hash_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter_h++;
-                editor.putInt("counter_h", counter_h);
-                editor.apply();
-
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, AboutUpActivity.class);
-                score_h1 =  Integer.valueOf(score_h);
-                System.out.println("score_h1"+score_h1);
-                intent.putExtra("counter_h",score_h1);
-
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -329,14 +339,8 @@ public class HomeActivity extends AppCompatActivity {
         hash_ve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter_h++;
-                editor.putInt("counter_h", counter_h);
-                editor.apply();
-
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
-                score_h1 =  Integer.valueOf(score_h);
-                System.out.println("score_h1"+score_h1);
-                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -345,14 +349,8 @@ public class HomeActivity extends AppCompatActivity {
         hash_ft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter_h++;
-                editor.putInt("counter_h", counter_h);
-                editor.apply();
-
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, AboutFtActivity.class);
-                score_h1 =  Integer.valueOf(score_h);
-                System.out.println("score_h1"+score_h1);
-                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -361,14 +359,8 @@ public class HomeActivity extends AppCompatActivity {
         hash_do.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter_h++;
-                editor.putInt("counter_h", counter_h);
-                editor.apply();
-
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, AboutDoActivity.class);
-                score_h1 =  Integer.valueOf(score_h);
-                System.out.println("score_h1"+score_h1);
-                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -377,14 +369,8 @@ public class HomeActivity extends AppCompatActivity {
         hash_aw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter_h++;
-                editor.putInt("counter_h", counter_h);
-                editor.apply();
-
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, AboutAnActivity.class);
-                score_h1 =  Integer.valueOf(score_h);
-                System.out.println("score_h1"+score_h1);
-                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -393,14 +379,8 @@ public class HomeActivity extends AppCompatActivity {
         hash_pf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter_h++;
-                editor.putInt("counter_h", counter_h);
-                editor.apply();
-
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, AboutPfActivity.class);
-                score_h1 =  Integer.valueOf(score_h);
-                System.out.println("score_h1"+score_h1);
-                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -410,14 +390,8 @@ public class HomeActivity extends AppCompatActivity {
         aboutpf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter_h++;
-                editor.putInt("counter_h", counter_h);
-                editor.apply();
-
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, AboutPfActivity.class);
-                score_h1 =  Integer.valueOf(score_h);
-                System.out.println("score_h1"+score_h1);
-                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -429,14 +403,8 @@ public class HomeActivity extends AppCompatActivity {
         aboutve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                counter_h++;
-                editor.putInt("counter_h", counter_h);
-                editor.apply();
-
+                clickCount();
                 Intent intent = new Intent(HomeActivity.this, AboutVeActivity.class);
-                score_h1 =  Integer.valueOf(score_h);
-                System.out.println("score_h1"+score_h1);
-                intent.putExtra("counter_h",score_h1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -497,6 +465,7 @@ public class HomeActivity extends AppCompatActivity {
         add_bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                clickCount();
                 count+=1;
                 insertKeyword();
                 init(meaningOutKeywordList); // 버튼 누르면 init()호출
@@ -505,6 +474,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        getImageFromStorage();
     }
     /**
      @Override
@@ -557,6 +527,7 @@ public class HomeActivity extends AppCompatActivity {
     private View.OnClickListener onClickItem = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            clickCount();
             String str = (String) v.getTag();
             Toast.makeText(HomeActivity.this, str, Toast.LENGTH_SHORT).show();
 
@@ -653,7 +624,6 @@ public class HomeActivity extends AppCompatActivity {
     private void insertKeyword(){
         String word = keyword.getText().toString();
         // 정규식 기반 예외처리 필요 (한, 영 숫자? 정도)됨
-        getImageFromStorage();
         if(word.length() == 0){
             Toast.makeText(HomeActivity.this, "값을 입력해주세요!", Toast.LENGTH_SHORT).show();
             return;
@@ -700,11 +670,18 @@ public class HomeActivity extends AppCompatActivity {
         testImgView = (ImageView) findViewById(R.id.testImgView);
         FirebaseStorage storage = FirebaseStorage.getInstance(); // FirebaseStorage 인스턴스 생성
         System.out.println(appState.getMeaningOutInfo().get("119레오").getLogoRef());
-        StorageReference storageRef = storage.getReference(appState.getMeaningOutInfo().get("119레오").getLogoRef()); // 스토리지 공간을 참조해서 이미지를 가져옴
+
+        StorageReference storageRef = storage.getReference(); // 스토리지 공간을 참조해서 이미지를 가져옴 (로고)
+
+        StorageReference gsReference = storage.getReferenceFromUrl("gs://nacho-da37d.appspot.com/공정무역/공기_로고.png");
+
+        StorageReference productRef = storage.getReference(
+                appState.getMeaningOutInfo().get("119레오").getProducts().get(0).getStorageRef()); // 스토리지 공간을 참조해서 이미지를 가져옴 (상품)
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Glide.with(view).load(storageRef).override(1000).into(testImgView); // Glide를 사용하여 이미지 로드
+                Glide.with(view).load(gsReference).override(1000).into(testImgView); // Glide를 사용하여 이미지 로드
 //                storageRef.getDownloadUrl().addOnCompleteListener(task -> {
 //                    if (task.isSuccessful()){
 //                        Glide.with(getApplicationContext() /* context */)

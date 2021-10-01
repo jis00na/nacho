@@ -30,10 +30,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         this.onClickItem = onClickItem;
     }
 
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         // context 와 parent.getContext() 는 같다.
         View view = LayoutInflater.from(context)
                 .inflate(R.layout.recyclerview_item, parent, false);
