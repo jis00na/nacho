@@ -155,7 +155,7 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("counter_alone", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         counter_h = prefs.getInt("counter_h", 0);
-        /*
+
         Button btn = findViewById(R.id.testBtn);
         ImageView testImgView = (ImageView) findViewById(R.id.testImgView);
         FirebaseStorage storage = FirebaseStorage.getInstance();
@@ -168,7 +168,7 @@ public class HomeActivity extends AppCompatActivity {
                 StorageReference storageRef = storage.getReference("apple.jpg"); // 스토리지 공간을 참조해서 이미지를 가져옴
                 Glide.with(view).load(storageRef).into(testImgView); // Glide를 사용하여 이미지 로드
             }
-        });*/
+        });
 
         // custom title bar
         //requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
