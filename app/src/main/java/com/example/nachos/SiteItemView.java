@@ -8,6 +8,9 @@ import android.widget.TextView;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.StorageReference;
+
 public class SiteItemView extends LinearLayout {
 
     //어디서든 사용할 수 있게하려면
@@ -43,9 +46,11 @@ public class SiteItemView extends LinearLayout {
     public void setCategory(String category){
         textView2.setText(category);
     }
-    public void setImage(int resId){
-        imageView.setImageResource(resId);
-    }
+    public void setImage(StorageReference ref){
+        // Reference 까지 인자로?
+        // view == ?
+        Glide.with(this).load(ref).override(1000).into(imageView); // Glide를 사용하여 이미지 로드
+    } // 여기에 글라이드
     public void setButton(OnClickListener gotosite){
         button.setOnClickListener(gotosite);
     }

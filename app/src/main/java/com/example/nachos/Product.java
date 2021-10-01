@@ -1,46 +1,70 @@
 package com.example.nachos;
 
+import com.google.firebase.storage.StorageReference;
+
 public class Product {
-    String Name;
-    String Cost;
-    String Notification;
-    int Pic;
 
-    public Product(String name, String cost, String notification, int pic) {
-        Name = name;
-        Cost = cost;
-        Notification = notification;
-        Pic = pic;
+    private String site;
+    private String productName;
+    private String introduction;
+    private String image;
+    private String url;
+    private StorageReference ref;
+
+    public Product(String site, String productName, String introduction, String image, String url, StorageReference ref) {
+        this.site = site;
+        this.productName = productName;
+        this.introduction = introduction;
+        this.image = image;
+        this.url = url;
+        this.ref = ref;
     }
 
-    public int getPic(){
-        return Pic;
-    }
-    public void setPic(int pic){
-        Pic = pic;
+    public String getSite() {
+        return site;
     }
 
-    public String getName() {
-        return Name;
+    public void setSite(String site) {
+        this.site = site;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public String getProductName() {
+        return productName;
     }
 
-    public String getCost() {
-        return Cost;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public void setCost(String cost) {
-        Cost = cost;
+    public String getIntroduction() {
+        return introduction;
     }
 
-    public String getNotification() {
-        return Notification;
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
-    public void setNotification(String notification) {
-        Notification = notification;
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public StorageReference getRef() {
+        return ref;
+    }
+
+    public void setRef(StorageReference ref) {
+        this.ref = ref;
     }
 }

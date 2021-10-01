@@ -19,6 +19,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AboutGoogleLogin extends AppCompatActivity {
 
@@ -26,12 +30,20 @@ public class AboutGoogleLogin extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
     private String TAG="mainTag";
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private ApplicationState appState;
+    private FirebaseFirestore db;
+
+
+
     private int RC_SIGN_IN=123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_login);
+        appState = (ApplicationState) getApplication();
+        db = FirebaseFirestore.getInstance();
 
         signInButton = findViewById(R.id.SignIn_Button);
 
@@ -103,8 +115,26 @@ public class AboutGoogleLogin extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             //updateUI(user);
+                            authStateListener = new FirebaseAuth.AuthStateListener() {
+                                @Override
+                                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                                    if (user != null){
+                                        System.out.println("현재 로그인 한 상태");
+                                    }else{
+                                        System.out.println("로그인 해주세요");
+                                    }
+                                }
+                            };
+                            Map<String, Object> docData = new HashMap<>();
+                            docData.put("name", user.getDisplayName());
+                            docData.put("email", user.getEmail());
+                            docData.put("score", 0);
+                            db.collection("Users")
+                                    .document(user.getEmail())
+                                    .set(docData);
                             Toast.makeText(getApplicationContext(), "Complete", Toast.LENGTH_LONG).show();
-                            System.out.println(user);
+                            System.out.println("이메일 : " + user.getEmail());
                             Intent intent = new Intent(AboutGoogleLogin.this, MypageActivity.class);
                             startActivity(intent);
                             overridePendingTransition(0, 0);

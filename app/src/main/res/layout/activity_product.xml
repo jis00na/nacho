@@ -292,23 +292,14 @@
                 android:gravity="center"
                 tools:ignore="MissingConstraints">
 
-                <ImageButton
-                    android:id="@+id/up_prod1"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-                    android:background="@drawable/back_upcycling"
-                    android:scaleType="centerCrop"
-                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
-                <ImageButton
-                    android:id="@+id/up_prod2"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/back_upcycling"
-                    android:scaleType="centerCrop"
-                    />
-                
             </LinearLayout>
 
             <!-- 비건 -->
@@ -356,23 +347,13 @@
                 android:gravity="center"
                 tools:ignore="MissingConstraints">
 
-                <ImageButton
-                    android:id="@+id/v_prod1"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-                    android:background="#00000000"
-                    android:src="@drawable/v_1"
-                    android:scaleType="centerCrop"
-                    />
-
-                <ImageButton
-                    android:id="@+id/v_prod2"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/v_2"
-                    android:scaleType="centerCrop"
-                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_ve"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </LinearLayout>
 
@@ -421,24 +402,13 @@
                 android:gravity="center"
                 tools:ignore="MissingConstraints">
 
-                <ImageButton
-                    android:id="@+id/ft_prod1"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-                    android:background="@drawable/back_fair"
-                    android:src="@drawable/ft_1"
-                    android:scaleType="centerCrop"
-                    />
-
-                <ImageButton
-                    android:id="@+id/ft_prod2"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-                    android:background="@drawable/back_fair"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ft_2"
-                    android:scaleType="centerCrop"
-                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_ft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </LinearLayout>
 
@@ -487,21 +457,13 @@
                 android:gravity="center"
                 tools:ignore="MissingConstraints">
 
-                <ImageButton
-                    android:id="@+id/do_prod1"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-                    android:background="@drawable/back_donation"
-                    android:scaleType="centerInside"
-                    />
-
-                <ImageButton
-                    android:id="@+id/do_prod2"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-                    android:background="@drawable/back_donation"
-                    android:scaleType="centerInside"
-                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_do"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </LinearLayout>
 
@@ -613,21 +575,13 @@
                 android:gravity="center"
                 tools:ignore="MissingConstraints">
 
-                <ImageButton
-                    android:id="@+id/pf_prod1"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-                    android:src="@drawable/pf_1"
-                    android:scaleType="centerInside"
-                    />
-
-                <ImageButton
-                    android:id="@+id/pf_prod2"
-                    android:layout_width="190dp"
-                    android:layout_height="190dp"
-                    android:src="@drawable/pf_2"
-                    android:scaleType="centerInside"
-                    />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_pl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </LinearLayout>
 
