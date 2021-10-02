@@ -1,7 +1,6 @@
 package com.example.nachos;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,8 +8,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-import android.os.Bundle;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class AboutPfActivity extends AppCompatActivity{
 
     private ApplicationState appState;
+    private ArrayList<String> siteList = new ArrayList<>(Arrays.asList("내추럴팁스", "더피커", "더험블", "덕분애", "루나컵", "쎄비보타닉", "아로마티카", "아이엠그리너", "오랜", "플라스틱제로"));
 
     @Override
     protected void onStop() {//5
@@ -51,6 +58,10 @@ public class AboutPfActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_pf);
         appState = (ApplicationState) getApplication();
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_about_pf);
+        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        recyclerView.setLayoutManager(layoutManager);
 
         Button title_back, title_prof; // 상단 타이틀
         Button home, cate, prod, stor; // 상단 탑뷰
@@ -227,6 +238,17 @@ public class AboutPfActivity extends AppCompatActivity{
             }
         });
 
+        Button pfpro;
+        pfpro = findViewById(R.id.button_pro);
+        pfpro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                Intent intent = new Intent(AboutPfActivity.this, ProductActivity.class);
+                intent.putExtra("frompf","frompf");
+                startActivity(intent);
+            }
+        });
         Button pfsite;
         pfsite = findViewById(R.id.button_site);
         pfsite.setOnClickListener(new View.OnClickListener() {
@@ -239,6 +261,44 @@ public class AboutPfActivity extends AppCompatActivity{
             }
         });
 
-    }
+        RecyclerView recyclerView_about_pf = findViewById(R.id.recyclerView_about_pf);
+        //GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        recyclerView_about_pf.setLayoutManager(layoutManager);
+        final ProductAdapter adapter = new ProductAdapter();
 
+        Random rand = new Random();
+        String baseUrl = "gs://nacho-da37d.appspot.com/";
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        ArrayList<Product> items = new ArrayList<Product>();
+
+
+        for (int i = 0; i < 2; i++){
+            int siteIdx = rand.nextInt(siteList.size());
+            int prodIdx = rand.nextInt(2);
+
+            StorageReference gsReference = storage.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getStorageRef());
+
+            items.add(new Product(
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getName(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getName(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getIntroduction(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getStorageRef(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getProductUrl(),
+                    gsReference));
+        }
+
+        recyclerView_about_pf.setAdapter(adapter);
+        adapter.setItems(items);
+        adapter.setOnItemClickListener(new OnProductItemClickListener() {
+            @Override
+            public void onItemClick(ProductAdapter.ViewHolder holder, View view, int position) {
+                clickCount();
+                Product item = adapter.getItem(position);
+                //Toast.makeText(getApplicationContext(), "이름 : " + item.getName() + "\n 가격 : " + item.getCost() +"\n 설명 : " + item.getNotification(),Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
 }

@@ -27,6 +27,8 @@ public class SiteActivity extends AppCompatActivity {
 
     private ApplicationState appState;
     private WebView webView;
+    private int top_ve, top_up, top_ft, top_do, top_ani, top_pf;
+    private Button hash_up, hash_ve, hash_ft, hash_do, hash_aw, hash_pf;
 
     @Override
     protected void onStop() {//5
@@ -55,15 +57,19 @@ public class SiteActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // 뒤로가기 키를 누를 때 & 웹뷰가 뒤로 갈 수 있는 상태일 때 뒤로 가라는 명령
-        if((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
-            webView.goBack();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        // 뒤로가기 키를 누를 때 & 웹뷰가 뒤로 갈 수 있는 상태일 때 뒤로 가라는 명령
+//        if((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {
+//            webView.goBack();
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,53 +106,31 @@ public class SiteActivity extends AppCompatActivity {
 
         ScrollView sv = (ScrollView) findViewById(R.id.scrollsite);
 
-
         LinearLayout text_ve;
         text_ve = (LinearLayout) findViewById(R.id.title_ve);
+        LinearLayout text_up = findViewById(R.id.title_up);
+        LinearLayout text_ani = findViewById(R.id.title_ani);
+        LinearLayout text_do = findViewById(R.id.title_do);
+        LinearLayout text_ft = findViewById(R.id.title_fair);
+        LinearLayout text_pf = findViewById(R.id.title_pla);
 
 
-        /*
-        int getve = (int) text_ve.getTop();
-        int linve = (int) title_ve.getBottom();
-        System.out.println("textve gettop: "+ getve);
-        System.out.println("linve gettop: "+ linve);
-
-        int[] loc = new int[2];
-        int[] loc1 = new int[2];
-
-
-        text_ve.getLocationInWindow(loc);
-        System.out.println("loc in window : " + loc[0] + ", " + loc[1]);
-
-        text_ve.getLocationOnScreen(loc1);
-        System.out.println("loc on screen : " + loc1[0] + ", " + loc1[1]);
-
-        int left = text_ve.getLeft();
-        int top = text_ve.getTop();
-        int right = text_ve.getRight();
-        int bottom = text_ve.getBottom();
-        System.out.println( "btn left : " + left + ", right : " + right + ", top : " + top + ", bottom : " + bottom);
-
-*/
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                /*
-                int[] loc = new int[2];
-                int[] loc1 = new int[2];
+                top_ve = text_ve.getTop();
+                top_up = text_up.getTop();
+                top_ani = text_ani.getTop();
+                top_do = text_do.getTop();
+                top_ft = text_ft.getTop();
+                top_pf = text_pf.getTop();
+                System.out.println(  ", top : " + top_ve );
 
-                text_ve.getLocationInWindow(loc);
-                System.out.println("loc in window : " + loc[0] + ", " + loc[1]);
-                text_ve.getLocationOnScreen(loc1);
-                System.out.println("loc on screen : " + loc1[0] + ", " + loc1[1]);
-                */
-
-                int top = text_ve.getTop();
-                System.out.println(  ", top : " + top );
             }
 
         }, 50);
+
 
         if (fromvegan != null){
             if (fromvegan.equals("fromvegan")){
@@ -154,7 +138,7 @@ public class SiteActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        sv.scrollTo(0,1579);
+                        sv.scrollTo(0,top_ve);
                     }
                 }, 50);
             }
@@ -165,7 +149,7 @@ public class SiteActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        sv.scrollTo(0,R.id.SiteList_ve);
+                        sv.scrollTo(0,top_ani);
                     }
                 }, 50);
             }
@@ -176,7 +160,7 @@ public class SiteActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        sv.scrollTo(0,R.id.SiteList_ve);
+                        sv.scrollTo(0,top_do);
                     }
                 }, 50);
             }
@@ -187,7 +171,7 @@ public class SiteActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        sv.scrollTo(0,R.id.SiteList_ve);
+                        sv.scrollTo(0,top_ft);
                     }
                 }, 50);
             }
@@ -198,7 +182,7 @@ public class SiteActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        sv.scrollTo(0,R.id.SiteList_ve);
+                        sv.scrollTo(0,top_pf);
                     }
                 }, 50);
             }
@@ -209,7 +193,7 @@ public class SiteActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        sv.scrollTo(0,R.id.SiteList_ve);
+                        sv.scrollTo(0,top_up);
                     }
                 }, 50);
             }
@@ -224,6 +208,13 @@ public class SiteActivity extends AppCompatActivity {
         cate = findViewById(R.id.buttom_cate);
         prod = findViewById(R.id.button_prod);
         stor = findViewById(R.id.button_stor);
+        hash_up = findViewById(R.id.hash1);
+        hash_ve = findViewById(R.id.hash2);
+        hash_ft = findViewById(R.id.hash3);
+        hash_do = findViewById(R.id.hash4);
+        hash_aw = findViewById(R.id.hash5);
+        hash_pf = findViewById(R.id.hash6);
+
 
         ListView listView_ani = findViewById(R.id.SiteList_ani); // 친환경
         ListView listView_do = findViewById(R.id.SiteList_do); // 기부, 후원 (donation)
@@ -863,6 +854,84 @@ public class SiteActivity extends AppCompatActivity {
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                 }
+            }
+        });
+
+        //HashTag 키워드 클릭 시 이벤트
+        hash_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_up);
+                    }
+                }, 50);
+            }
+        });
+
+        hash_ve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_ve);
+                    }
+                }, 50);
+            }
+        });
+
+        hash_ft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_ft);
+                    }
+                }, 50);
+            }
+        });
+
+        hash_do.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_do);
+                    }
+                }, 50);
+            }
+        });
+
+        hash_aw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_ani);
+                    }
+                }, 50);
+            }
+        });
+
+        hash_pf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_pf);
+                    }
+                }, 50);
             }
         });
 

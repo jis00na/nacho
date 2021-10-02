@@ -252,6 +252,17 @@ public class AboutVeActivity extends AppCompatActivity {
             }
         });
 
+        Button vepro;
+        vepro = findViewById(R.id.button_pro);
+        vepro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                Intent intent = new Intent(AboutVeActivity.this, ProductActivity.class);
+                intent.putExtra("fromvegan","fromvegan");
+                startActivity(intent);
+            }
+        });
         Button vesite;
         vesite = findViewById(R.id.button_site);
         vesite.setOnClickListener(new View.OnClickListener() {
@@ -290,6 +301,9 @@ public class AboutVeActivity extends AppCompatActivity {
                     appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getProductUrl(),
                     gsReference));
         }
+
+
+
 
         recyclerView_about_ve.setAdapter(adapter);
         adapter.setItems(items);

@@ -11,8 +11,9 @@
         android:name=".ApplicationState"
         android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true"
+        android:largeHeap="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -23,7 +24,7 @@
         <activity
             android:name=".MypageActivity"
             android:exported="true" />
-        <activity android:name=".HomeActivity">
+        <activity android:name=".StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,7 +47,7 @@
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".StartActivity"
+            android:name=".HomeActivity"
             android:exported="true"
             tools:ignore="Instantiatable" />
         <activity
