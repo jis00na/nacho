@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,6 +49,14 @@ public class MypageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mypage);
         appState = (ApplicationState) getApplication();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        TextView name = findViewById(R.id.mygmail);
+        name.setText(user.getDisplayName());
+
+        TextView score = findViewById(R.id.myscore);
+        String temp = appState.getScore() + "점";
+        score.setText(temp);
 
         Button title_back, title_prof; // 상단 타이틀
         Button home, cate, prod, stor; // 상단 탑뷰
@@ -129,6 +138,5 @@ public class MypageActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
-
     }
 }

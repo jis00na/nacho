@@ -114,9 +114,6 @@
     </LinearLayout>
 
     <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
@@ -321,7 +318,7 @@
                 android:orientation="horizontal">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                    android:id="@+id/recyclerView_about_ani"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -332,29 +329,29 @@
                     android:id="@+id/button_pro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/keyword_back"
-                    android:gravity="left|center_vertical"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
+                    android:layout_toRightOf="@id/recyclerView_about_ani"
+                    android:background="@drawable/keyword_back"
+                    android:gravity="left|center_vertical"
                     android:text="  동물복지\n  제품 &#160;&#160;&#160;더보기 > &#160;&#160;"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView"
                     tools:ignore="MissingConstraints" />
 
                 <Button
                     android:id="@+id/button_site"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/keyword_back"
-                    android:layout_marginRight="15dp"
-                    android:gravity="left|center_vertical"
+                    android:layout_below="@id/button_pro"
                     android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_toRightOf="@id/recyclerView_about_ani"
+                    android:background="@drawable/keyword_back"
+                    android:gravity="left|center_vertical"
                     android:text="  동물복지\n  사이트 더보기 >  "
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView"
-                    android:layout_below="@id/button_pro"
                     tools:ignore="MissingConstraints" />
 
 

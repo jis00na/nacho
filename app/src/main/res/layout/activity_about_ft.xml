@@ -321,7 +321,7 @@
                 android:orientation="horizontal">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
+                    android:id="@+id/recyclerView_about_ft"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -339,7 +339,7 @@
                     android:text="  공정무역\n  제품 &#160;&#160;&#160;더보기 > &#160;&#160;"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView"
+                    android:layout_toRightOf="@id/recyclerView_about_ft"
                     tools:ignore="MissingConstraints" />
 
                 <Button
@@ -353,7 +353,7 @@
                     android:text="  공정무역\n  사이트 더보기 >  "
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView"
+                    android:layout_toRightOf="@id/recyclerView_about_ft"
                     android:layout_below="@id/button_pro"
                     tools:ignore="MissingConstraints" />
 
