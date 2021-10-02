@@ -6,11 +6,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,6 +27,8 @@ import java.util.ArrayList;
 public class ProductActivity extends AppCompatActivity{
 
     private ApplicationState appState;
+    private int top_ve, top_up, top_ft, top_do, top_ani, top_pf;
+    private Button hash_up, hash_ve, hash_ft, hash_do, hash_aw, hash_pf;
 
     @Override
     protected void onStop() {//5
@@ -58,6 +63,28 @@ public class ProductActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         appState = (ApplicationState) getApplication();
+
+        Intent intent_ve = getIntent();
+        Intent intent_an = getIntent();
+        Intent intent_do = getIntent();
+        Intent intent_ft = getIntent();
+        Intent intent_pf = getIntent();
+        Intent intent_up = getIntent();
+
+        String fromvegan = "";
+        String froman = "";
+        String fromdo = "";
+        String fromft = "";
+        String frompf = "";
+        String fromup = "";
+
+
+        fromvegan = intent_ve.getStringExtra("fromvegan");
+        froman = intent_an.getStringExtra("froman");
+        fromdo = intent_do.getStringExtra("fromdo");
+        fromft = intent_ft.getStringExtra("fromft");
+        frompf = intent_pf.getStringExtra("frompf");
+        fromup = intent_up.getStringExtra("fromup");
 
         RecyclerView recyclerView_up = findViewById(R.id.recyclerView_up);
         RecyclerView recyclerView_ve = findViewById(R.id.recyclerView_ve);
@@ -102,6 +129,100 @@ public class ProductActivity extends AppCompatActivity{
         final ProductAdapter adapter_fr = new ProductAdapter();
 
 
+        ScrollView sv = (ScrollView) findViewById(R.id.scrollsite);
+
+        LinearLayout text_ve;
+        text_ve = (LinearLayout) findViewById(R.id.title_ve);
+        LinearLayout text_up = findViewById(R.id.title_up);
+        LinearLayout text_ani = findViewById(R.id.title_ani);
+        LinearLayout text_do = findViewById(R.id.title_do);
+        LinearLayout text_ft = findViewById(R.id.title_fair);
+        LinearLayout text_pf = findViewById(R.id.title_pla);
+
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                top_ve = text_ve.getTop();
+                top_up = text_up.getTop();
+                top_ani = text_ani.getTop();
+                top_do = text_do.getTop();
+                top_ft = text_ft.getTop();
+                top_pf = text_pf.getTop();
+                System.out.println(  ", top : " + top_ve );
+
+            }
+
+        }, 50);
+
+        if (fromvegan != null){
+            if (fromvegan.equals("fromvegan")){
+                System.out.println("vegan!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_ve);
+                    }
+                }, 50);
+            }
+        }
+        else if (froman != null){
+            if (froman.equals("froman")){
+                System.out.println("an!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_ani);
+                    }
+                }, 50);
+            }
+        }
+        else if (fromdo != null){
+            if (fromdo.equals("fromdo")){
+                System.out.println("do!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_do);
+                    }
+                }, 50);
+            }
+        }
+        else if (fromft != null){
+            if (fromft.equals("fromft")){
+                System.out.println("ft!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_ft);
+                    }
+                }, 50);
+            }
+        }
+        else if (frompf != null){
+            if (frompf.equals("frompf")){
+                System.out.println("pf!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_pf);
+                    }
+                }, 50);
+            }
+        }
+        else if (fromup != null){
+            if (fromup.equals("fromup")){
+                System.out.println("up!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_up);
+                    }
+                }, 50);
+            }
+        }
+
         Button title_back, title_prof; // 상단 타이틀
         Button home, cate, prod, stor; // 상단 탑뷰
 
@@ -111,6 +232,13 @@ public class ProductActivity extends AppCompatActivity{
         cate = findViewById(R.id.buttom_cate);
         prod = findViewById(R.id.button_prod);
         stor = findViewById(R.id.button_stor);
+        hash_up = findViewById(R.id.hash1);
+        hash_ve = findViewById(R.id.hash2);
+        hash_ft = findViewById(R.id.hash3);
+        hash_do = findViewById(R.id.hash4);
+        hash_aw = findViewById(R.id.hash5);
+        hash_pf = findViewById(R.id.hash6);
+
 
         String baseUrl = "gs://nacho-da37d.appspot.com/";
 
@@ -1392,8 +1520,83 @@ public class ProductActivity extends AppCompatActivity{
                     overridePendingTransition(0, 0);
                 }
             }
+        });//HashTag 키워드 클릭 시 이벤트
+        hash_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_up);
+                    }
+                }, 50);
+            }
         });
 
+        hash_ve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_ve);
+                    }
+                }, 50);
+            }
+        });
+
+        hash_ft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_ft);
+                    }
+                }, 50);
+            }
+        });
+
+        hash_do.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_do);
+                    }
+                }, 50);
+            }
+        });
+
+        hash_aw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_ani);
+                    }
+                }, 50);
+            }
+        });
+
+        hash_pf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sv.scrollTo(0,top_pf);
+                    }
+                }, 50);
+            }
+        });
         // 상단 탑뷰 클릭 시 이벤트
         home.setOnClickListener(new View.OnClickListener() {
             @Override

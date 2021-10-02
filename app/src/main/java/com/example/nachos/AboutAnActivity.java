@@ -1,6 +1,7 @@
 package com.example.nachos;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class AboutAnActivity extends AppCompatActivity{
     private TextView tv_count;
@@ -67,6 +70,9 @@ public class AboutAnActivity extends AppCompatActivity{
         SharedPreferences.Editor editor = prefs.edit();
         counter = prefs.getInt("counter", 0);
 
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_about_ani);
+        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        recyclerView.setLayoutManager(layoutManager);
 
 
         tv_count = findViewById(R.id.tv_count);
@@ -125,9 +131,9 @@ public class AboutAnActivity extends AppCompatActivity{
             public void onClick(View v) {
                 clickCount();
                 Intent intent = new Intent(AboutAnActivity.this, HomeActivity.class);
-                int score1 =  Integer.valueOf(score);
-                System.out.println("score1"+score1);
-                intent.putExtra("counter",score1);
+//                int score1 =  Integer.valueOf(score);
+//                System.out.println("score1"+score1);
+//                intent.putExtra("counter",score1);
                 startActivity(intent);
                 overridePendingTransition(0, 0);
             }
@@ -224,25 +230,18 @@ public class AboutAnActivity extends AppCompatActivity{
             }
         });
 
-//        RecyclerView recyclerView_up = findViewById(R.id.recyclerView_about_do);
-//
-//        String baseUrl = "gs://nacho-da37d.appspot.com/";
-//
-//        ArrayList<Product> items = new ArrayList<Product>();
-//        FirebaseStorage storage = FirebaseStorage.getInstance();
-//
-//
-//        recyclerView_up.setAdapter(adapter);
-//        adapter.setItems(items);
-//
-//        adapter.setOnItemClickListener(new OnProductItemClickListener() {
-//            @Override
-//            public void onItemClick(ProductAdapter.ViewHolder holder, View view, int position) {
-//                clickCount();
-//                Product item = adapter.getItem(position);
-//                //Toast.makeText(getApplicationContext(), "이름 : " + item.getName() + "\n 가격 : " + item.getCost() +"\n 설명 : " + item.getNotification(),Toast.LENGTH_LONG).show();
-//            }
-//        });
+
+        Button anprod;
+        anprod = findViewById(R.id.button_pro);
+        anprod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                Intent intent = new Intent(AboutAnActivity.this, ProductActivity.class);
+                intent.putExtra("froman","froman");
+                startActivity(intent);
+            }
+        });
 
         Button ansite;
         ansite = findViewById(R.id.button_site);
@@ -255,6 +254,45 @@ public class AboutAnActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+        RecyclerView recyclerView_about_ani = findViewById(R.id.recyclerView_about_ani);
+        //GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        recyclerView_about_ani.setLayoutManager(layoutManager);
+        final ProductAdapter adapter = new ProductAdapter();
+
+        Random rand = new Random();
+        String baseUrl = "gs://nacho-da37d.appspot.com/";
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        ArrayList<Product> items = new ArrayList<Product>();
+
+
+        for (int i = 0; i < 2; i++){
+            int siteIdx = rand.nextInt(siteList.size());
+            int prodIdx = rand.nextInt(2);
+
+            StorageReference gsReference = storage.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getStorageRef());
+
+            items.add(new Product(
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getName(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getName(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getIntroduction(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getStorageRef(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getProductUrl(),
+                    gsReference));
+        }
+
+        recyclerView_about_ani.setAdapter(adapter);
+        adapter.setItems(items);
+        adapter.setOnItemClickListener(new OnProductItemClickListener() {
+            @Override
+            public void onItemClick(ProductAdapter.ViewHolder holder, View view, int position) {
+                clickCount();
+                Product item = adapter.getItem(position);
+                //Toast.makeText(getApplicationContext(), "이름 : " + item.getName() + "\n 가격 : " + item.getCost() +"\n 설명 : " + item.getNotification(),Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
 }

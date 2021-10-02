@@ -328,31 +328,33 @@
 
                 <Button
                     android:id="@+id/button_pro"
-                    android:layout_width="wrap_content"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/keyword_back"
-                    android:gravity="left|center_vertical"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
-                    android:text="  업사이클링\n  제품 &#160;&#160;&#160;더보기 > &#160;&#160;"
+                    android:layout_below="@id/recyclerView_about_up"
+                    android:background="@drawable/keyword_back3"
+                    android:gravity="center"
+                    android:text="  업사이클링 제품 더보기 > "
                     android:textColor="@color/white"
+                    android:layout_marginLeft="20dp"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView_about_up"
                     tools:ignore="MissingConstraints" />
 
                 <Button
                     android:id="@+id/button_site"
-                    android:layout_width="wrap_content"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/keyword_back"
-                    android:layout_marginRight="15dp"
-                    android:gravity="left|center_vertical"
+                    android:background="@drawable/keyword_back3"
+                    android:gravity="center"
                     android:layout_marginTop="10dp"
-                    android:text="  업사이클링\n  사이트 더보기 >  "
+                    android:layout_marginRight="20dp"
+                    android:text="  업사이클링 사이트 더보기 >  "
+                    android:layout_marginLeft="10dp"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView_about_up"
-                    android:layout_below="@id/button_pro"
+                    android:layout_below="@id/recyclerView_about_up"
+                    android:layout_toRightOf="@id/button_pro"
                     tools:ignore="MissingConstraints" />
 
 
