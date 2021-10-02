@@ -267,7 +267,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_ve"
                 tools:ignore="MissingConstraints"
-            />
+                />
 
             <TextView
                 android:id="@+id/text_ve1"
@@ -382,7 +382,7 @@ Vegan\n
                 android:orientation="horizontal">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_aboutve"
+                    android:id="@+id/recyclerView_about_ve"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -395,7 +395,7 @@ Vegan\n
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
-                    android:layout_toRightOf="@id/recyclerView_ve"
+                    android:layout_toRightOf="@id/recyclerView_about_ve"
                     android:background="@drawable/keyword_back3"
                     android:gravity="left|center_vertical"
                     android:text="  비건\n  제품 &#160;&#160;&#160;더보기 > &#160;&#160;"
@@ -414,7 +414,7 @@ Vegan\n
                     android:text="  비건\n  사이트 더보기 >  "
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView_ve"
+                    android:layout_toRightOf="@id/recyclerView_about_ve"
                     android:layout_below="@id/button_pro"
                     tools:ignore="MissingConstraints" />
 
@@ -468,7 +468,7 @@ Vegan\n
                     android:layout_marginRight="15dp"
                     android:background="@drawable/main_fairtrade"
                     android:layout_weight="1"
-                     />
+                    />
 
                 <Button
                     android:id="@+id/content_pf"

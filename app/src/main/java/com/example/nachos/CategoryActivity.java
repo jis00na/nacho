@@ -152,7 +152,6 @@ public class CategoryActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 clickCount();
-
                 onBackPressed();
                 overridePendingTransition(0, 0);
             }

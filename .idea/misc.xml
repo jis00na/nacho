@@ -7,10 +7,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/drawable/back_animal.xml" value="0.17395833333333333" />
+        <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_about_animal.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_about_do.xml" value="0.32518115942028986" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_about_ft.xml" value="0.32518115942028986" />
+        <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_about_pf.xml" value="0.20625" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_about_up.xml" value="0.32518115942028986" />
-        <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_about_ve.xml" value="0.32518115942028986" />
+        <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_about_ve.xml" value="0.23174778761061948" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_category.xml" value="0.32518115942028986" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_home.xml" value="0.10052083333333334" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_mypage.xml" value="0.1578125" />
@@ -19,6 +21,7 @@
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/activity_webview.xml" value="0.1546875" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/custom_title.xml" value="0.32518115942028986" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/product_item.xml" value="0.32518115942028986" />
+        <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/product_item1.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/recyclerview_item.xml" value="0.32518115942028986" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/site_listview.xml" value="0.32518115942028986" />
         <entry key="..\:/Users/xkaka/AndroidStudioProjects/nacho/app/src/main/res/layout/slider.xml" value="0.32518115942028986" />

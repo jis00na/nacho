@@ -69,6 +69,11 @@ public class ProductActivity extends AppCompatActivity{
         //up
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView_up.setLayoutManager(layoutManager);
+
+        //recyclerView_ve.setLayoutManager(layoutManager);
+        //recyclerView_ft.setLayoutManager(layoutManager);
+//        recyclerView_do.setLayoutManager(layoutManager);
+//        recyclerView_pl.setLayoutManager(layoutManager);
         final ProductAdapter adapter = new ProductAdapter();
 
         //ve
@@ -113,6 +118,7 @@ public class ProductActivity extends AppCompatActivity{
         //up
         ArrayList<Product> items = new ArrayList<Product>();
         FirebaseStorage storage = FirebaseStorage.getInstance();
+
 
         //119레오 업
         StorageReference gsReference_119 = storage.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("119레오").getProducts().get(0).getStorageRef());
@@ -1291,6 +1297,7 @@ public class ProductActivity extends AppCompatActivity{
 
         recyclerView_up.setAdapter(adapter);
         adapter.setItems(items);
+
         adapter.setOnItemClickListener(new OnProductItemClickListener() {
             @Override
             public void onItemClick(ProductAdapter.ViewHolder holder, View view, int position) {

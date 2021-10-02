@@ -320,7 +320,7 @@
                 android:orientation="horizontal">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_up"
+                    android:id="@+id/recyclerView_about_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
@@ -338,7 +338,7 @@
                     android:text="  업사이클링\n  제품 &#160;&#160;&#160;더보기 > &#160;&#160;"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView_up"
+                    android:layout_toRightOf="@id/recyclerView_about_up"
                     tools:ignore="MissingConstraints" />
 
                 <Button
@@ -352,7 +352,7 @@
                     android:text="  업사이클링\n  사이트 더보기 >  "
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView_up"
+                    android:layout_toRightOf="@id/recyclerView_about_up"
                     android:layout_below="@id/button_pro"
                     tools:ignore="MissingConstraints" />
 
@@ -387,34 +387,34 @@
                 tools:ignore="MissingConstraints" />
 
             <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="70dp"
-                            android:id="@+id/group_content"
-                            android:textColor="@color/white"
-                            android:textStyle="bold"
-                            app:layout_constraintTop_toBottomOf="@id/text_co"
-                            tools:ignore="MissingConstraints">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="70dp"
+                android:id="@+id/group_content"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/text_co"
+                tools:ignore="MissingConstraints">
 
-                            <Button
-                                android:id="@+id/content_pf"
-                                android:layout_width="140dp"
-                                android:layout_height="110dp"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginLeft="15dp"
-                                android:layout_marginRight="15dp"
-                                android:background="@drawable/main_plasticfree"
-                                android:layout_weight="1"
-                                />
+                <Button
+                    android:id="@+id/content_pf"
+                    android:layout_width="140dp"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/main_plasticfree"
+                    android:layout_weight="1"
+                    />
 
-                            <Button
-                                android:id="@+id/content_ve"
-                                android:layout_width="140dp"
-                                android:layout_height="110dp"
-                                android:layout_marginTop="20dp"
-                                android:background="@drawable/aboutve"
-                                android:layout_weight="1" />
+                <Button
+                    android:id="@+id/content_ve"
+                    android:layout_width="140dp"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/aboutve"
+                    android:layout_weight="1" />
 
             </LinearLayout>
 

@@ -2,39 +2,26 @@ package com.example.nachos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Layout;
-import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import static java.sql.DriverManager.println;
-
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SiteActivity extends AppCompatActivity {
 
@@ -248,12 +235,102 @@ public class SiteActivity extends AppCompatActivity {
         // 제품 추가
         appState = (ApplicationState) getApplication();
         String baseUrl = "gs://nacho-da37d.appspot.com/";
+        FirebaseStorage storage_root = FirebaseStorage.getInstance();
 
         // ---------------------------------------------------------------------------------------
         // 친환경
         // ---------------------------------------------------------------------------------------
+        SiteAdapter adapter_ani = new SiteAdapter();
 
-        // 여기 해야합니다
+        // 굿백
+        StorageReference gsReference_goodbag = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("굿백").getLogoRef());
+        adapter_ani.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("굿백").getName(),
+                appState.getMeaningOutInfo().get("굿백").getTags().get(0),
+                appState.getMeaningOutInfo().get("굿백").getLogoRef(),
+                appState.getMeaningOutInfo().get("굿백").getUrl(),
+                gsReference_goodbag));
+
+        // 녹색장터
+        StorageReference gsReference_greenproduct = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("녹색장터").getLogoRef());
+        adapter_ani.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("녹색장터").getName(),
+                appState.getMeaningOutInfo().get("녹색장터").getTags().get(0),
+                appState.getMeaningOutInfo().get("녹색장터").getLogoRef(),
+                appState.getMeaningOutInfo().get("녹색장터").getUrl(),
+                gsReference_greenproduct));
+
+        // 더클레어
+        StorageReference gsReference_theklair = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("더클레어").getLogoRef());
+        adapter_ani.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("더클레어").getName(),
+                appState.getMeaningOutInfo().get("더클레어").getTags().get(0),
+                appState.getMeaningOutInfo().get("더클레어").getLogoRef(),
+                appState.getMeaningOutInfo().get("더클레어").getUrl(),
+                gsReference_theklair));
+
+        // 마이아일랜드
+        StorageReference gsReference_myisland = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("마이아일랜드").getLogoRef());
+        adapter_ani.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("마이아일랜드").getName(),
+                appState.getMeaningOutInfo().get("마이아일랜드").getTags().get(0),
+                appState.getMeaningOutInfo().get("마이아일랜드").getLogoRef(),
+                appState.getMeaningOutInfo().get("마이아일랜드").getUrl(),
+                gsReference_myisland));
+
+        // 모레상점
+        StorageReference gsReference_morestore = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("모레상점").getLogoRef());
+        adapter_ani.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("모레상점").getName(),
+                appState.getMeaningOutInfo().get("모레상점").getTags().get(0),
+                appState.getMeaningOutInfo().get("모레상점").getLogoRef(),
+                appState.getMeaningOutInfo().get("모레상점").getUrl(),
+                gsReference_morestore));
+
+        // 슈가버블
+        StorageReference gsReference_sugarbubble = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("슈가버블").getLogoRef());
+        adapter_ani.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("슈가버블").getName(),
+                appState.getMeaningOutInfo().get("슈가버블").getTags().get(0),
+                appState.getMeaningOutInfo().get("슈가버블").getLogoRef(),
+                appState.getMeaningOutInfo().get("슈가버블").getUrl(),
+                gsReference_sugarbubble));
+
+        // 아렌시아
+        StorageReference gsReference_arencia = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("아렌시아").getLogoRef());
+        adapter_ani.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("아렌시아").getName(),
+                appState.getMeaningOutInfo().get("아렌시아").getTags().get(0),
+                appState.getMeaningOutInfo().get("아렌시아").getLogoRef(),
+                appState.getMeaningOutInfo().get("아렌시아").getUrl(),
+                gsReference_arencia));
+
+        // 자연상점
+        StorageReference gsReference_onlyeco = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("자연상점").getLogoRef());
+        adapter_ani.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("자연상점").getName(),
+                appState.getMeaningOutInfo().get("자연상점").getTags().get(0),
+                appState.getMeaningOutInfo().get("자연상점").getLogoRef(),
+                appState.getMeaningOutInfo().get("자연상점").getUrl(),
+                gsReference_onlyeco));
+
+        // 톤28
+        StorageReference gsReference_toun28 = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("톤28").getLogoRef());
+        adapter_ani.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("톤28").getName(),
+                appState.getMeaningOutInfo().get("톤28").getTags().get(0),
+                appState.getMeaningOutInfo().get("톤28").getLogoRef(),
+                appState.getMeaningOutInfo().get("톤28").getUrl(),
+                gsReference_toun28));
+
+        // 헬로네이처
+        StorageReference gsReference_hellonature = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("헬로네이처").getLogoRef());
+        adapter_ani.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("헬로네이처").getName(),
+                appState.getMeaningOutInfo().get("헬로네이처").getTags().get(0),
+                appState.getMeaningOutInfo().get("헬로네이처").getLogoRef(),
+                appState.getMeaningOutInfo().get("헬로네이처").getUrl(),
+                gsReference_hellonature));
 
 
 
@@ -264,8 +341,7 @@ public class SiteActivity extends AppCompatActivity {
         SiteAdapter adapter_do = new SiteAdapter();
 
         // 4OCEAN
-        FirebaseStorage storage_4OCEAN = FirebaseStorage.getInstance();
-        StorageReference gsReference_4OCEAN = storage_4OCEAN.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("4OCEAN").getLogoRef());
+        StorageReference gsReference_4OCEAN = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("4OCEAN").getLogoRef());
         adapter_do.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("4OCEAN").getName(),
                 appState.getMeaningOutInfo().get("4OCEAN").getTags().get(0),
@@ -274,8 +350,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_4OCEAN));
 
         // 녹챠방
-        FirebaseStorage storage_nokchabang = FirebaseStorage.getInstance();
-        StorageReference gsReference_nokchabang = storage_nokchabang.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("녹챠방").getLogoRef());
+        StorageReference gsReference_nokchabang = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("녹챠방").getLogoRef());
         adapter_do.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("녹챠방").getName(),
                 appState.getMeaningOutInfo().get("녹챠방").getTags().get(0),
@@ -284,8 +359,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_nokchabang));
 
         // 데일리유니크
-        FirebaseStorage storage_dailyUnique = FirebaseStorage.getInstance();
-        StorageReference gsReference_dailyUnique = storage_dailyUnique.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("데일리유니크").getLogoRef());
+        StorageReference gsReference_dailyUnique = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("데일리유니크").getLogoRef());
         adapter_do.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("데일리유니크").getName(),
                 appState.getMeaningOutInfo().get("데일리유니크").getTags().get(0),
@@ -294,8 +368,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_dailyUnique));
 
         // 메리디아니
-        FirebaseStorage storage_meridiani = FirebaseStorage.getInstance();
-        StorageReference gsReference_meridiani = storage_meridiani.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("메리디아니").getLogoRef());
+        StorageReference gsReference_meridiani = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("메리디아니").getLogoRef());
         adapter_do.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("메리디아니").getName(),
                 appState.getMeaningOutInfo().get("메리디아니").getTags().get(0),
@@ -304,18 +377,16 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_meridiani));
 
         // 모레상점
-        FirebaseStorage storage_morestore = FirebaseStorage.getInstance();
-        StorageReference gsReference_morestore = storage_morestore.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("모레상점").getLogoRef());
+        StorageReference gsReference_morestore2 = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("모레상점").getLogoRef());
         adapter_do.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("모레상점").getName(),
                 appState.getMeaningOutInfo().get("모레상점").getTags().get(0),
                 appState.getMeaningOutInfo().get("모레상점").getLogoRef(),
                 appState.getMeaningOutInfo().get("모레상점").getUrl(),
-                gsReference_morestore));
+                gsReference_morestore2));
 
         // 비코
-        FirebaseStorage storage_bcoe = FirebaseStorage.getInstance();
-        StorageReference gsReference_bcoe = storage_bcoe.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("비코").getLogoRef());
+        StorageReference gsReference_bcoe = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("비코").getLogoRef());
         adapter_do.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("비코").getName(),
                 appState.getMeaningOutInfo().get("비코").getTags().get(0),
@@ -324,8 +395,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_bcoe));
 
         // 비프렌드마켓
-        FirebaseStorage storage_befriendmarket = FirebaseStorage.getInstance();
-        StorageReference gsReference_befriendmarket = storage_befriendmarket.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("비프렌드마켓").getLogoRef());
+        StorageReference gsReference_befriendmarket = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("비프렌드마켓").getLogoRef());
         adapter_do.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("비프렌드마켓").getName(),
                 appState.getMeaningOutInfo().get("비프렌드마켓").getTags().get(0),
@@ -334,8 +404,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_befriendmarket));
 
         // 아틀리에리케
-        FirebaseStorage storage_atelierlykke = FirebaseStorage.getInstance();
-        StorageReference gsReference_atelierlykke = storage_atelierlykke.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("아틀리에리케").getLogoRef());
+        StorageReference gsReference_atelierlykke = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("아틀리에리케").getLogoRef());
         adapter_do.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("아틀리에리케").getName(),
                 appState.getMeaningOutInfo().get("아틀리에리케").getTags().get(0),
@@ -344,8 +413,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_atelierlykke));
 
         // 윙블링
-        FirebaseStorage storage_wingbling = FirebaseStorage.getInstance();
-        StorageReference gsReference_wingbling = storage_wingbling.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("윙블링").getLogoRef());
+        StorageReference gsReference_wingbling = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("윙블링").getLogoRef());
         adapter_do.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("윙블링").getName(),
                 appState.getMeaningOutInfo().get("윙블링").getTags().get(0),
@@ -354,8 +422,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_wingbling));
 
         // 팅클유
-        FirebaseStorage storage_tingklu = FirebaseStorage.getInstance();
-        StorageReference gsReference_tingklu = storage_tingklu.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("팅클유").getLogoRef());
+        StorageReference gsReference_tingklu = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("팅클유").getLogoRef());
         adapter_do.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("팅클유").getName(),
                 appState.getMeaningOutInfo().get("팅클유").getTags().get(0),
@@ -373,8 +440,7 @@ public class SiteActivity extends AppCompatActivity {
         SiteAdapter adapter_fair = new SiteAdapter();
 
         // FairTradeKorea
-        FirebaseStorage storage_FairTradeKorea = FirebaseStorage.getInstance();
-        StorageReference gsReference_FairTradeKorea = storage_FairTradeKorea.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("FairTradeKorea").getLogoRef());
+        StorageReference gsReference_FairTradeKorea = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("FairTradeKorea").getLogoRef());
         adapter_fair.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("FairTradeKorea").getName(),
                 appState.getMeaningOutInfo().get("FairTradeKorea").getTags().get(0),
@@ -383,8 +449,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_FairTradeKorea));
 
         // fynbo
-        FirebaseStorage storage_fynbo = FirebaseStorage.getInstance();
-        StorageReference gsReference_fynbo = storage_fynbo.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("fynbo").getLogoRef());
+        StorageReference gsReference_fynbo = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("fynbo").getLogoRef());
         adapter_fair.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("fynbo").getName(),
                 appState.getMeaningOutInfo().get("fynbo").getTags().get(0),
@@ -393,8 +458,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_fynbo));
 
         // 공기
-        FirebaseStorage storage_gonggi = FirebaseStorage.getInstance();
-        StorageReference gsReference_gonggi = storage_gonggi.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("공기").getLogoRef());
+        StorageReference gsReference_gonggi = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("공기").getLogoRef());
         adapter_fair.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("공기").getName(),
                 appState.getMeaningOutInfo().get("공기").getTags().get(0),
@@ -403,8 +467,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_gonggi));
 
         // 아름다운커피
-        FirebaseStorage storage_beautifulcoffee = FirebaseStorage.getInstance();
-        StorageReference gsReference_beautifulcoffee = storage_beautifulcoffee.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("아름다운커피").getLogoRef());
+        StorageReference gsReference_beautifulcoffee = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("아름다운커피").getLogoRef());
         adapter_fair.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("아름다운커피").getName(),
                 appState.getMeaningOutInfo().get("아름다운커피").getTags().get(0),
@@ -413,8 +476,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_beautifulcoffee));
 
         // 어스맨
-        FirebaseStorage storage_earthman = FirebaseStorage.getInstance();
-        StorageReference gsReference_earthman = storage_earthman.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("어스맨").getLogoRef());
+        StorageReference gsReference_earthman = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("어스맨").getLogoRef());
         adapter_fair.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("어스맨").getName(),
                 appState.getMeaningOutInfo().get("어스맨").getTags().get(0),
@@ -423,8 +485,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_earthman));
 
         // 에코몽
-        FirebaseStorage storage_ecomont = FirebaseStorage.getInstance();
-        StorageReference gsReference_ecomont = storage_ecomont.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("에코몽").getLogoRef());
+        StorageReference gsReference_ecomont = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("에코몽").getLogoRef());
         adapter_fair.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("에코몽").getName(),
                 appState.getMeaningOutInfo().get("에코몽").getTags().get(0),
@@ -433,8 +494,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_ecomont));
 
         // 옥스팜
-        FirebaseStorage storage_oxfam = FirebaseStorage.getInstance();
-        StorageReference gsReference_oxfam = storage_oxfam.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("옥스팜").getLogoRef());
+        StorageReference gsReference_oxfam = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("옥스팜").getLogoRef());
         adapter_fair.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("옥스팜").getName(),
                 appState.getMeaningOutInfo().get("옥스팜").getTags().get(0),
@@ -443,8 +503,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_oxfam));
 
         // 울림
-        FirebaseStorage storage_ullim = FirebaseStorage.getInstance();
-        StorageReference gsReference_ullim = storage_ullim.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("울림").getLogoRef());
+        StorageReference gsReference_ullim = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("울림").getLogoRef());
         adapter_fair.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("울림").getName(),
                 appState.getMeaningOutInfo().get("울림").getTags().get(0),
@@ -453,8 +512,7 @@ public class SiteActivity extends AppCompatActivity {
                 gsReference_ullim));
 
         // 트립티
-        FirebaseStorage storage_tripti = FirebaseStorage.getInstance();
-        StorageReference gsReference_tripti = storage_tripti.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("트립티").getLogoRef());
+        StorageReference gsReference_tripti = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("트립티").getLogoRef());
         adapter_fair.addItem(new SiteItem(
                 appState.getMeaningOutInfo().get("트립티").getName(),
                 appState.getMeaningOutInfo().get("트립티").getTags().get(0),
@@ -466,12 +524,308 @@ public class SiteActivity extends AppCompatActivity {
 
 
 
-        listView_ani.setAdapter(adapter_do);
+        // ---------------------------------------------------------------------------------------
+        // 플라스틱프리
+        // ---------------------------------------------------------------------------------------
+        SiteAdapter adapter_pla = new SiteAdapter();
+
+        // 내추럴팁스
+        StorageReference gsReference_naturaltips = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("내추럴팁스").getLogoRef());
+        adapter_pla.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("내추럴팁스").getName(),
+                appState.getMeaningOutInfo().get("내추럴팁스").getTags().get(0),
+                appState.getMeaningOutInfo().get("내추럴팁스").getLogoRef(),
+                appState.getMeaningOutInfo().get("내추럴팁스").getUrl(),
+                gsReference_naturaltips));
+
+        // 더피커
+        StorageReference gsReference_thepicker = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("더피커").getLogoRef());
+        adapter_pla.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("더피커").getName(),
+                appState.getMeaningOutInfo().get("더피커").getTags().get(0),
+                appState.getMeaningOutInfo().get("더피커").getLogoRef(),
+                appState.getMeaningOutInfo().get("더피커").getUrl(),
+                gsReference_thepicker));
+
+        // 더험블
+        StorageReference gsReference_thehumble = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("더험블").getLogoRef());
+        adapter_pla.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("더험블").getName(),
+                appState.getMeaningOutInfo().get("더험블").getTags().get(0),
+                appState.getMeaningOutInfo().get("더험블").getLogoRef(),
+                appState.getMeaningOutInfo().get("더험블").getUrl(),
+                gsReference_thehumble));
+
+        // 덕분애
+        StorageReference gsReference_thanksto = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("덕분애").getLogoRef());
+        adapter_pla.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("덕분애").getName(),
+                appState.getMeaningOutInfo().get("덕분애").getTags().get(0),
+                appState.getMeaningOutInfo().get("덕분애").getLogoRef(),
+                appState.getMeaningOutInfo().get("덕분애").getUrl(),
+                gsReference_thanksto));
+
+        // 루나컵
+        StorageReference gsReference_lunacup = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("루나컵").getLogoRef());
+        adapter_pla.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("루나컵").getName(),
+                appState.getMeaningOutInfo().get("루나컵").getTags().get(0),
+                appState.getMeaningOutInfo().get("루나컵").getLogoRef(),
+                appState.getMeaningOutInfo().get("루나컵").getUrl(),
+                gsReference_lunacup));
+
+        // 쎄비보타닉
+        StorageReference gsReference_savvybotanic = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("쎄비보타닉").getLogoRef());
+        adapter_pla.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("쎄비보타닉").getName(),
+                appState.getMeaningOutInfo().get("쎄비보타닉").getTags().get(0),
+                appState.getMeaningOutInfo().get("쎄비보타닉").getLogoRef(),
+                appState.getMeaningOutInfo().get("쎄비보타닉").getUrl(),
+                gsReference_savvybotanic));
+
+        // 아로마티카
+        StorageReference gsReference_aromatica = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("아로마티카").getLogoRef());
+        adapter_pla.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("아로마티카").getName(),
+                appState.getMeaningOutInfo().get("아로마티카").getTags().get(0),
+                appState.getMeaningOutInfo().get("아로마티카").getLogoRef(),
+                appState.getMeaningOutInfo().get("아로마티카").getUrl(),
+                gsReference_aromatica));
+
+        // 아이엠그리너
+        StorageReference gsReference_iamgreener = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("아이엠그리너").getLogoRef());
+        adapter_pla.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("아이엠그리너").getName(),
+                appState.getMeaningOutInfo().get("아이엠그리너").getTags().get(0),
+                appState.getMeaningOutInfo().get("아이엠그리너").getLogoRef(),
+                appState.getMeaningOutInfo().get("아이엠그리너").getUrl(),
+                gsReference_iamgreener));
+
+        // 오랜
+        StorageReference gsReference_oren = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("오랜").getLogoRef());
+        adapter_pla.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("오랜").getName(),
+                appState.getMeaningOutInfo().get("오랜").getTags().get(0),
+                appState.getMeaningOutInfo().get("오랜").getLogoRef(),
+                appState.getMeaningOutInfo().get("오랜").getUrl(),
+                gsReference_oren));
+
+        // 플라스틱제로
+        StorageReference gsReference_plasticzero = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("플라스틱제로").getLogoRef());
+        adapter_pla.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("플라스틱제로").getName(),
+                appState.getMeaningOutInfo().get("플라스틱제로").getTags().get(0),
+                appState.getMeaningOutInfo().get("플라스틱제로").getLogoRef(),
+                appState.getMeaningOutInfo().get("플라스틱제로").getUrl(),
+                gsReference_plasticzero));
+
+
+
+
+
+
+        // ---------------------------------------------------------------------------------------
+        // 업사이클링
+        // ---------------------------------------------------------------------------------------
+        SiteAdapter adapter_up = new SiteAdapter();
+
+        // 119레오
+        StorageReference gsReference_119reo = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("119레오").getLogoRef());
+        adapter_up.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("119레오").getName(),
+                appState.getMeaningOutInfo().get("119레오").getTags().get(0),
+                appState.getMeaningOutInfo().get("119레오").getLogoRef(),
+                appState.getMeaningOutInfo().get("119레오").getUrl(),
+                gsReference_119reo));
+
+        // 누깍
+        StorageReference gsReference_nukak = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("누깍").getLogoRef());
+        adapter_up.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("누깍").getName(),
+                appState.getMeaningOutInfo().get("누깍").getTags().get(0),
+                appState.getMeaningOutInfo().get("누깍").getLogoRef(),
+                appState.getMeaningOutInfo().get("누깍").getUrl(),
+                gsReference_nukak));
+
+        // 메리우드
+        StorageReference gsReference_merrywood = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("메리우드").getLogoRef());
+        adapter_up.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("메리우드").getName(),
+                appState.getMeaningOutInfo().get("메리우드").getTags().get(0),
+                appState.getMeaningOutInfo().get("메리우드").getLogoRef(),
+                appState.getMeaningOutInfo().get("메리우드").getUrl(),
+                gsReference_merrywood));
+
+        // 밀키프로젝트
+        StorageReference gsReference_milkyproject = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("밀키프로젝트").getLogoRef());
+        adapter_up.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("밀키프로젝트").getName(),
+                appState.getMeaningOutInfo().get("밀키프로젝트").getTags().get(0),
+                appState.getMeaningOutInfo().get("밀키프로젝트").getLogoRef(),
+                appState.getMeaningOutInfo().get("밀키프로젝트").getUrl(),
+                gsReference_milkyproject));
+
+        // 얼킨
+        StorageReference gsReference_ulkin = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("얼킨").getLogoRef());
+        adapter_up.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("얼킨").getName(),
+                appState.getMeaningOutInfo().get("얼킨").getTags().get(0),
+                appState.getMeaningOutInfo().get("얼킨").getLogoRef(),
+                appState.getMeaningOutInfo().get("얼킨").getUrl(),
+                gsReference_ulkin));
+
+        // 에코파티메아리
+        StorageReference gsReference_ecopartymearry = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("에코파티메아리").getLogoRef());
+        adapter_up.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("에코파티메아리").getName(),
+                appState.getMeaningOutInfo().get("에코파티메아리").getTags().get(0),
+                appState.getMeaningOutInfo().get("에코파티메아리").getLogoRef(),
+                appState.getMeaningOutInfo().get("에코파티메아리").getUrl(),
+                gsReference_ecopartymearry));
+
+        // 오버랩
+        StorageReference gsReference_overlab = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("오버랩").getLogoRef());
+        adapter_up.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("오버랩").getName(),
+                appState.getMeaningOutInfo().get("오버랩").getTags().get(0),
+                appState.getMeaningOutInfo().get("오버랩").getLogoRef(),
+                appState.getMeaningOutInfo().get("오버랩").getUrl(),
+                gsReference_overlab));
+
+        // 오운유
+        StorageReference gsReference_ownu = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("오운유").getLogoRef());
+        adapter_up.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("오운유").getName(),
+                appState.getMeaningOutInfo().get("오운유").getTags().get(0),
+                appState.getMeaningOutInfo().get("오운유").getLogoRef(),
+                appState.getMeaningOutInfo().get("오운유").getUrl(),
+                gsReference_ownu));
+
+        // 컷더트래쉬
+        StorageReference gsReference_cutthetrash = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("컷더트래쉬").getLogoRef());
+        adapter_up.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("컷더트래쉬").getName(),
+                appState.getMeaningOutInfo().get("컷더트래쉬").getTags().get(0),
+                appState.getMeaningOutInfo().get("컷더트래쉬").getLogoRef(),
+                appState.getMeaningOutInfo().get("컷더트래쉬").getUrl(),
+                gsReference_cutthetrash));
+
+        // 큐클리프
+        StorageReference gsReference_cueclyp = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("큐클리프").getLogoRef());
+        adapter_up.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("큐클리프").getName(),
+                appState.getMeaningOutInfo().get("큐클리프").getTags().get(0),
+                appState.getMeaningOutInfo().get("큐클리프").getLogoRef(),
+                appState.getMeaningOutInfo().get("큐클리프").getUrl(),
+                gsReference_cueclyp));
+
+
+
+        // ---------------------------------------------------------------------------------------
+        // 비건
+        // ---------------------------------------------------------------------------------------
+        SiteAdapter adapter_ve = new SiteAdapter();
+
+        // 러빙헛
+        StorageReference gsReference_lovinghut = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("러빙헛").getLogoRef());
+        adapter_ve.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("러빙헛").getName(),
+                appState.getMeaningOutInfo().get("러빙헛").getTags().get(0),
+                appState.getMeaningOutInfo().get("러빙헛").getLogoRef(),
+                appState.getMeaningOutInfo().get("러빙헛").getUrl(),
+                gsReference_lovinghut));
+
+        // 멜릭서
+        StorageReference gsReference_melixir = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("멜릭서").getLogoRef());
+        adapter_ve.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("멜릭서").getName(),
+                appState.getMeaningOutInfo().get("멜릭서").getTags().get(0),
+                appState.getMeaningOutInfo().get("멜릭서").getLogoRef(),
+                appState.getMeaningOutInfo().get("멜릭서").getUrl(),
+                gsReference_melixir));
+
+        // 베지맘
+        StorageReference gsReference_vegemom = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("베지맘").getLogoRef());
+        adapter_ve.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("베지맘").getName(),
+                appState.getMeaningOutInfo().get("베지맘").getTags().get(0),
+                appState.getMeaningOutInfo().get("베지맘").getLogoRef(),
+                appState.getMeaningOutInfo().get("베지맘").getUrl(),
+                gsReference_vegemom));
+
+        // 베지푸드
+        StorageReference gsReference_vegefood = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("베지푸드").getLogoRef());
+        adapter_ve.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("베지푸드").getName(),
+                appState.getMeaningOutInfo().get("베지푸드").getTags().get(0),
+                appState.getMeaningOutInfo().get("베지푸드").getLogoRef(),
+                appState.getMeaningOutInfo().get("베지푸드").getUrl(),
+                gsReference_vegefood));
+
+        // 보나쥬르
+        StorageReference gsReference_bonajour = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("보나쥬르").getLogoRef());
+        adapter_ve.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("보나쥬르").getName(),
+                appState.getMeaningOutInfo().get("보나쥬르").getTags().get(0),
+                appState.getMeaningOutInfo().get("보나쥬르").getLogoRef(),
+                appState.getMeaningOutInfo().get("보나쥬르").getUrl(),
+                gsReference_bonajour));
+
+        // 비건스페이스
+        StorageReference gsReference_veganspace = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("비건스페이스").getLogoRef());
+        adapter_ve.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("비건스페이스").getName(),
+                appState.getMeaningOutInfo().get("비건스페이스").getTags().get(0),
+                appState.getMeaningOutInfo().get("비건스페이스").getLogoRef(),
+                appState.getMeaningOutInfo().get("비건스페이스").getUrl(),
+                gsReference_veganspace));
+
+        // 비건푸드
+        StorageReference gsReference_veganfood = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("비건푸드").getLogoRef());
+        adapter_ve.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("비건푸드").getName(),
+                appState.getMeaningOutInfo().get("비건푸드").getTags().get(0),
+                appState.getMeaningOutInfo().get("비건푸드").getLogoRef(),
+                appState.getMeaningOutInfo().get("비건푸드").getUrl(),
+                gsReference_veganfood));
+
+        // 진선푸드
+        StorageReference gsReference_jinsunfood = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("진선푸드").getLogoRef());
+        adapter_ve.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("진선푸드").getName(),
+                appState.getMeaningOutInfo().get("진선푸드").getTags().get(0),
+                appState.getMeaningOutInfo().get("진선푸드").getLogoRef(),
+                appState.getMeaningOutInfo().get("진선푸드").getUrl(),
+                gsReference_jinsunfood));
+
+        // 채식나라
+        StorageReference gsReference_chaesiknara = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("채식나라").getLogoRef());
+        adapter_ve.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("채식나라").getName(),
+                appState.getMeaningOutInfo().get("채식나라").getTags().get(0),
+                appState.getMeaningOutInfo().get("채식나라").getLogoRef(),
+                appState.getMeaningOutInfo().get("채식나라").getUrl(),
+                gsReference_chaesiknara));
+
+        // 채식한끼몰
+        StorageReference gsReference_hanggi = storage_root.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("채식한끼몰").getLogoRef());
+        adapter_ve.addItem(new SiteItem(
+                appState.getMeaningOutInfo().get("채식한끼몰").getName(),
+                appState.getMeaningOutInfo().get("채식한끼몰").getTags().get(0),
+                appState.getMeaningOutInfo().get("채식한끼몰").getLogoRef(),
+                appState.getMeaningOutInfo().get("채식한끼몰").getUrl(),
+                gsReference_hanggi));
+
+
+
+        listView_ani.setAdapter(adapter_ani);
         listView_do.setAdapter(adapter_do);
         listView_fair.setAdapter(adapter_fair);
-        listView_pla.setAdapter(adapter_do);
-        listView_up.setAdapter(adapter_do);
-        listView_ve.setAdapter(adapter_do);
+        listView_pla.setAdapter(adapter_pla);
+        listView_up.setAdapter(adapter_up);
+        listView_ve.setAdapter(adapter_ve);
+
+
 
         setListViewHeight(listView_ani);
         setListViewHeight(listView_do);
@@ -617,6 +971,7 @@ public class SiteActivity extends AppCompatActivity {
             gotosite = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    clickCount();
                     Intent intent = new Intent(SiteActivity.this, Webview.class);
                     intent.putExtra("url", item.getUrl());
                     startActivity(intent);
