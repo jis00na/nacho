@@ -1,6 +1,7 @@
 package com.example.nachos;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -67,7 +68,39 @@ public class AboutGoogleLogin extends AppCompatActivity {
                 signIn();
             }
         });
+        Intent intent_log = getIntent();
+        String logout = "";
+        logout = intent_log.getStringExtra("logout");
+
+        if (logout != null){
+            if (logout.equals("logout")){
+                System.out.println("logout!!");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        signOut();
+                        onBackPressed();
+                    }
+
+                    public void onBackPressed() {
+                        //super.onBackPressed();
+                        signOut(); //이 액티비티에서 종료되어야 하는 활동 종료시켜주는 함수
+                        Intent intent = new Intent(AboutGoogleLogin.this, CategoryActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(0, 0);
+                        finish();
+                    }
+
+                }, 50);
+
+            }
+
+        }
+
+
     }
+
+
 
     // [START on_start_check_user]
     @Override
@@ -159,7 +192,9 @@ public class AboutGoogleLogin extends AppCompatActivity {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             // Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
                             Toast.makeText(getApplicationContext(), "Authentication Failed", Toast.LENGTH_LONG).show();
-
+                            Intent intent = new Intent(AboutGoogleLogin.this, MypageActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(0, 0);
                             // updateUI(null);
                         }
 
@@ -187,9 +222,10 @@ public class AboutGoogleLogin extends AppCompatActivity {
                 new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getApplicationContext(), "Complete", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "로그아웃이 되었습니다.", Toast.LENGTH_LONG).show();
                     }
                 });
+
     }
 
     private void revokeAccess() {

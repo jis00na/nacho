@@ -219,4 +219,10 @@ public class CategoryActivity extends AppCompatActivity{
             }
         });
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        // super.onBackPressed();
+    }
 }

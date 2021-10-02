@@ -58,6 +58,10 @@ public class MypageActivity extends AppCompatActivity {
         String temp = appState.getScore() + "점";
         score.setText(temp);
 
+
+        Button logout;
+        logout = findViewById(R.id.logout);
+
         Button title_back, title_prof; // 상단 타이틀
         Button home, cate, prod, stor; // 상단 탑뷰
         title_back = findViewById(R.id.btn_Back);
@@ -138,5 +142,28 @@ public class MypageActivity extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount();
+                Intent intent = new Intent(MypageActivity.this, AboutGoogleLogin.class);
+                intent.putExtra("logout","logout");
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        Intent intent = new Intent(MypageActivity.this, HomeActivity.class);
+        startActivity(intent);
+        overridePendingTransition(0, 0);
+
+    }
+
+
 }
