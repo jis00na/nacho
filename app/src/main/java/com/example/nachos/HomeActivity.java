@@ -476,7 +476,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        getImageFromStorage();
+//        getImageFromStorage();
     }
     /**
      @Override
@@ -670,56 +670,56 @@ public class HomeActivity extends AppCompatActivity {
     // 여기  storage에서 이미지 가져오는 코드
 
 
-    private void getImageFromStorage(){
-
-
-
-        Button btn = findViewById(R.id.testBtn);
-        testImgView = (ImageView) findViewById(R.id.testImgView);
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageReference = storage.getReference();
-        StorageReference pathReference = storageReference.child("공정무역");
-        StorageReference submitProfile = storageReference.child("공정무역/공기_로고.png");
-        submitProfile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Glide.with(HomeActivity.this).load(uri).into(testImgView);
-                System.out.println("uri"+uri);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                System.out.println("uri");
-            }
-        });
-
-
-
-
-        System.out.println(appState.getMeaningOutInfo().get("119레오").getLogoRef());
-
-        StorageReference storageRef = storage.getReference(); // 스토리지 공간을 참조해서 이미지를 가져옴 (로고)
-
-        StorageReference gsReference = storage.getReferenceFromUrl("gs://nacho-da37d.appspot.com/공정무역/공기_로고.png");
-
-        StorageReference productRef = storage.getReference(
-                appState.getMeaningOutInfo().get("119레오").getProducts().get(0).getStorageRef()); // 스토리지 공간을 참조해서 이미지를 가져옴 (상품)
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Glide.with(view).load(gsReference).override(1000).into(testImgView); // Glide를 사용하여 이미지 로드
-
-//                storageRef.getDownloadUrl().addOnCompleteListener(task -> {
-//                    if (task.isSuccessful()){
-//                        Glide.with(getApplicationContext() /* context */)
-//                                .load(storageRef)
-//                                .into(testImgView);
-//                    }else{
-//                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-            }
-        });
-    }
+//    private void getImageFromStorage(){
+//
+//
+//
+//        Button btn = findViewById(R.id.testBtn);
+//        testImgView = (ImageView) findViewById(R.id.testImgView);
+//        FirebaseStorage storage = FirebaseStorage.getInstance();
+//        StorageReference storageReference = storage.getReference();
+//        StorageReference pathReference = storageReference.child("공정무역");
+//        StorageReference submitProfile = storageReference.child("공정무역/공기_로고.png");
+//        submitProfile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                Glide.with(HomeActivity.this).load(uri).into(testImgView);
+//                System.out.println("uri"+uri);
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                System.out.println("uri");
+//            }
+//        });
+//
+//
+//
+//
+//        System.out.println(appState.getMeaningOutInfo().get("119레오").getLogoRef());
+//
+//        StorageReference storageRef = storage.getReference(); // 스토리지 공간을 참조해서 이미지를 가져옴 (로고)
+//
+//        StorageReference gsReference = storage.getReferenceFromUrl("gs://nacho-da37d.appspot.com/공정무역/공기_로고.png");
+//
+//        StorageReference productRef = storage.getReference(
+//                appState.getMeaningOutInfo().get("119레오").getProducts().get(0).getStorageRef()); // 스토리지 공간을 참조해서 이미지를 가져옴 (상품)
+//
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Glide.with(view).load(gsReference).override(1000).into(testImgView); // Glide를 사용하여 이미지 로드
+//
+////                storageRef.getDownloadUrl().addOnCompleteListener(task -> {
+////                    if (task.isSuccessful()){
+////                        Glide.with(getApplicationContext() /* context */)
+////                                .load(storageRef)
+////                                .into(testImgView);
+////                    }else{
+////                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+////                    }
+////                });
+//            }
+//        });
+//    }
 }

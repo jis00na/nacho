@@ -23,16 +23,6 @@
                 android:layout_height="40dp"
                 android:background="@drawable/title_nacho"
                 android:scaleType="matrix" />
-            <TextView
-                android:id="@+id/tv_count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="50sp"
-                android:gravity="center"
-                tools:layout_editor_absoluteX="196dp"
-                tools:layout_editor_absoluteY="232dp"
-                tools:ignore="MissingConstraints" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -74,9 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Home"
-            android:textColor="#F89318"
-            android:background="#92D0D0D0"
-            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="#ffffff"
             tools:ignore="MissingConstraints" />
 
         <Button
@@ -213,7 +202,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:text="#동물복지"
+                    android:text="#친환경"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     tools:ignore="MissingConstraints" />
@@ -226,7 +215,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:text="#플라스틱프리"
+                    android:text="#제로웨이스트"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     tools:ignore="MissingConstraints" />
@@ -253,32 +242,46 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:text="\n
-모든 생명은 존중받아야 합니다.\n
-\n
-인간과 인간 외 동물은 크게 다르지 않습니다.\n
-인간과 동물의 복지는 연관되어 있습니다.\n
-동물은 고통과 감성을 느끼지만, 표현에 한계가 있습니다.\n
-우리는 동물을 마음으로 이해하고 배려해야 합니다.\n
-\n
-우리는 동물이 어떻게 살고 있는지, 또 어떻게 죽는지\n
-지속적이고 적극적인 관심을 가져야 합니다.\n
-동물의 고통을 최소화하는 방향으로 소비해야 합니다.\n
-당신의 소비가 생명을 구합니다.\n
-\n
-가치있는 소비생활을 통해\n
-도움이 필요한 동물들을 도와주세요.\n
-\n
-동물복지\n
-관련 상품을 아래에서 만나보세요.\n
-\n
-"
+   지구는 앞을 향해 걸어가고 있습니다.\n
+   오늘의 지구는, 앞으로의 지구 중 가장 건강한 지구입니다.\n
+            \n
+   코로나19의 확산으로 플라스틱 사용량이 불가피하게 급증하였으며\n
+   온실가스는 지구 온난화를 가속화하고 있으며\n
+   미세먼지는 우리의 일상을 직접적으로 위협하고 있습니다.\n
+            \n
+   이제는 친환경을 넘어\n
+   생존을 위한 필환경을 실천해야 할 때입니다.\n
+            \n
+   나초에서 추천하는 친환경 브랜드에서는\n
+   기획 단계부터 제조, 포장, 유통, 마케팅까지\n
+   산업 전반에 걸쳐 친환경 관점에서 설계하고 운영합니다.\n
+            \n
+   지속 가능한 소재를 사용하여 제품을 제작하며\n
+   재활용되지 않는 부분을 최소화하고\n
+   포장 패키지 재료 하나하나를 검수하며\n
+   자원을 소모하지 않는 제로웨이스트 광고로 마케팅을 진행합니다.\n
+            \n
+   바로 지금도 지구 온난화로 인해 \n
+   도시가 물에 잠기고, 폭염에 고통받는 등\n
+   직접적인 피해를 받고 있는 사람들이 있습니다.\n
+            \n
+   미래 세대를 위해서,\n
+   그리고 우리를 위해서.\n
+            \n
+   '그린슈머'는 특별한 사람들이 아닙니다.\n
+   나초와 함께 지금부터 그린슈머가 되어보세요.\n
+            \n
+   친환경\n
+   관련 상품을 아래에서 만나보세요.\n
+            \n"
                 android:textColor="#000000"
                 android:textSize="5pt"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_ab"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints"
+              />
 
             <View
                 android:id="@+id/line1"
@@ -327,31 +330,33 @@
 
                 <Button
                     android:id="@+id/button_pro"
-                    android:layout_width="wrap_content"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
-                    android:layout_toRightOf="@id/recyclerView_about_ani"
-                    android:background="@drawable/keyword_back"
-                    android:gravity="left|center_vertical"
-                    android:text="  동물복지\n  제품 &#160;&#160;&#160;더보기 > &#160;&#160;"
+                    android:layout_below="@id/recyclerView_about_ani"
+                    android:background="@drawable/keyword_back3"
+                    android:gravity="center"
+                    android:text="  친환경 제품 더보기 > "
                     android:textColor="@color/white"
+                    android:layout_marginLeft="20dp"
                     android:textStyle="bold"
                     tools:ignore="MissingConstraints" />
 
                 <Button
                     android:id="@+id/button_site"
-                    android:layout_width="wrap_content"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/button_pro"
+                    android:background="@drawable/keyword_back3"
+                    android:gravity="center"
                     android:layout_marginTop="10dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_toRightOf="@id/recyclerView_about_ani"
-                    android:background="@drawable/keyword_back"
-                    android:gravity="left|center_vertical"
-                    android:text="  동물복지\n  사이트 더보기 >  "
+                    android:layout_marginRight="20dp"
+                    android:text="  친환경 사이트 더보기 >  "
+                    android:layout_marginLeft="10dp"
                     android:textColor="@color/white"
                     android:textStyle="bold"
+                    android:layout_below="@id/recyclerView_about_ani"
+                    android:layout_toRightOf="@id/button_pro"
                     tools:ignore="MissingConstraints" />
 
 
