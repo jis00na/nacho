@@ -96,8 +96,8 @@
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:text="Store"
-            android:textColor="#F89318"
-            android:background="#92D0D0D0"
+            android:textColor="#FFFFFF"
+            android:background="#BEDDB9"
             android:textStyle="bold"
             tools:ignore="MissingConstraints" />
     </LinearLayout>
@@ -110,7 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="7dp"
         android:background="#ffffff"
             >
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -133,30 +133,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/text2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/search_box"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:hint="  검색"
-                android:padding="13dp"
-                android:textColor="#3E3E3E"
-                android:textSize="15dp"
-                android:textStyle="normal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text1"
-                tools:ignore="MissingConstraints" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
                 android:id="@+id/group_hash1"
-                app:layout_constraintTop_toBottomOf="@id/text2"
+                app:layout_constraintTop_toBottomOf="@id/text1"
                 >
                 <Button
                     android:id="@+id/hash1"
@@ -228,7 +210,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:text="#동물복지"
+                    android:text="#친환경"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     tools:ignore="MissingConstraints" />
@@ -241,25 +223,12 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:text="#플라스틱프리"
+                    android:text="#제로웨이스트"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     tools:ignore="MissingConstraints" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/text3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text=" 한 번에 만나보는 #미닝아웃 #가치소비 "
-                android:textColor="#000000"
-                android:textSize="9pt"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/group_hash2"
-                tools:ignore="MissingConstraints" />
 
             <ListView
                 android:id="@+id/SiteList1"
@@ -267,7 +236,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text3"
+                app:layout_constraintTop_toBottomOf="@id/group_hash2"
                 tools:ignore="MissingConstraints" />
 
             <TextView
@@ -479,7 +448,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
-                    android:text="  동물복지 "
+                    android:text="  친환경 "
                     android:textColor="#000000"
                     android:textSize="10pt"
                     android:textStyle="bold" />
@@ -491,7 +460,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
-                    android:text="  나도 이제 랜선 집사 "
+                    android:text="  환경을 위한 가장 확실한 소비  "
                     android:textColor="#000000"
                     android:textSize="8pt"
                     android:textStyle="bold" />
@@ -523,7 +492,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
-                    android:text="  플라스틱 프리 "
+                    android:text="  제로웨이스트 "
                     android:textColor="#000000"
                     android:textSize="10pt"
                     android:textStyle="bold" />
@@ -550,43 +519,8 @@
                 app:layout_constraintTop_toBottomOf="@id/title_pla"
                 tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/text17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text=" 키워드를 넘어 #미닝아웃 #가치소비 "
-                android:textColor="#000000"
-                android:textSize="9pt"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/SiteList_pla"
-                tools:ignore="MissingConstraints" />
-
-            <ListView
-                android:id="@+id/SiteList2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="30dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text17"
-                tools:ignore="MissingConstraints" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-    android:id="@+id/bottomNavigationView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:itemBackground="@android:color/white"
-    app:labelVisibilityMode="labeled"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:menu="@menu/menu_bottomnavigationview"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,9 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Home"
-            android:textColor="#F89318"
-            android:background="#92D0D0D0"
-            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="#ffffff"
             tools:ignore="MissingConstraints" />
 
         <Button
@@ -205,7 +204,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:text="#동물복지"
+                    android:text="#친환경"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     tools:ignore="MissingConstraints" />
@@ -218,7 +217,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:text="#플라스틱프리"
+                    android:text="#제로웨이스트"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     tools:ignore="MissingConstraints" />
@@ -320,31 +319,33 @@
 
                 <Button
                     android:id="@+id/button_pro"
-                    android:layout_width="wrap_content"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/keyword_back"
-                    android:gravity="left|center_vertical"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="15dp"
-                    android:text="  기부&amp;후원\n  제품 &#160;&#160;&#160;더보기 > &#160;&#160;"
+                    android:layout_below="@id/recyclerView_about_do"
+                    android:background="@drawable/keyword_back3"
+                    android:gravity="center"
+                    android:text="  기부&amp;후원 제품 더보기> "
                     android:textColor="@color/white"
+                    android:layout_marginLeft="20dp"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView_about_do"
                     tools:ignore="MissingConstraints" />
 
                 <Button
                     android:id="@+id/button_site"
-                    android:layout_width="wrap_content"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/keyword_back"
-                    android:layout_marginRight="15dp"
-                    android:gravity="left|center_vertical"
+                    android:background="@drawable/keyword_back3"
+                    android:gravity="center"
                     android:layout_marginTop="10dp"
-                    android:text="  기부&amp;후원\n  사이트 더보기 >  "
+                    android:layout_marginRight="20dp"
+                    android:text="기부&amp;후원 사이트 더보기>"
+                    android:layout_marginLeft="10dp"
                     android:textColor="@color/white"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@id/recyclerView_about_do"
-                    android:layout_below="@id/button_pro"
+                    android:layout_below="@id/recyclerView_about_do"
+                    android:layout_toRightOf="@id/button_pro"
                     tools:ignore="MissingConstraints" />
 
 
