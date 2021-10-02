@@ -127,9 +127,9 @@
       "tags": ["비건"],
       "products": [
         {
-          "storageRef": "비건/채식한끼몰_배부른 곤약밥",
+          "storageRef": "비건/채식한끼몰_배부른곤약밥",
           "productUrl": "https://www.hanggi.kr/goods/goods_view.php?goodsNo=1000000462&mtn=26%5E%7C%5E%EC%9D%B4+%EC%83%81%ED%92%88+%EC%96%B4%EB%95%8C%EC%9A%94%3F%5E%7C%5En#lyZoom",
-          "name": "배부른 곤약밥",
+          "name": "배부른곤약밥",
           "introduction": "낮은 칼로리, 포만감 가득 배부른 곤약밥"
         },
         {
@@ -471,9 +471,9 @@
       "tags": ["기부"],
       "products": [
         {
-          "storageRef": "기부/비코_폰케이스&그립톡 세트",
+          "storageRef": "기부/비코_폰케이스&그립톡세트",
           "productUrl": "http://skin-skin5.bcoe101.cafe24.com/product/%EC%9C%84%EC%96%BC%EB%82%AB%EC%96%B4%ED%86%A0%EC%9D%B4-%ED%8F%B0%EC%BC%80%EC%9D%B4%EC%8A%A4-%EA%B7%B8%EB%A6%BD%ED%86%A1-%EC%84%B8%ED%8A%B8/116/category/1/display/2/",
-          "name": "폰케이스&그립톡 세트",
+          "name": "폰케이스&그립톡세트",
           "introduction": "We are not a toy."
         },
         {
@@ -1103,9 +1103,9 @@
           "introduction": "나무 베지 않고, 플라스틱 섞지 않고 만든 커피연필"
         },
         {
-          "storageRef": "플라스틱프리/더피커_천연치실",
+          "storageRef": "플라스틱프리/더피커_밀랍랩",
           "productUrl": "https://thepicker.net/ALL/?idx=138",
-          "name": "천연치실",
+          "name": "밀랍랩",
           "introduction": "자연에도 내 치아에도 건강한 천연 치실"
         }
       ]

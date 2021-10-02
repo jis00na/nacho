@@ -1,7 +1,6 @@
 package com.example.nachos;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -9,15 +8,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 public class AboutVeActivity extends AppCompatActivity {
 
     private ApplicationState appState;
+
+    private ArrayList<String> siteList = new ArrayList<>(Arrays.asList("러빙헛", "멜릭서", "베지맘", "베지푸드", "보나쥬르", "비건스페이스", "비건푸드", "진선푸드", "채식나라", "채식한끼몰"));
 
     @Override
     protected void onStop() {//5
@@ -51,11 +56,6 @@ public class AboutVeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_ve);
         appState = (ApplicationState) getApplication();
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
-        recyclerView.setLayoutManager(layoutManager);
-        final ProductAdapter adapter = new ProductAdapter();
 
         Button title_back, title_prof; // 상단 타이틀
         Button home, cate, prod, stor; // 상단 탑뷰
@@ -258,15 +258,34 @@ public class AboutVeActivity extends AppCompatActivity {
             }
         });
 
+        RecyclerView recyclerView_about_ve = findViewById(R.id.recyclerView_about_ve);
+        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        recyclerView_about_ve.setLayoutManager(layoutManager);
+        final ProductAdapter adapter = new ProductAdapter();
 
-//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+        Random rand = new Random();
+        String baseUrl = "gs://nacho-da37d.appspot.com/";
+        FirebaseStorage storage = FirebaseStorage.getInstance();
 
-        recyclerView.setAdapter(adapter);
+        ArrayList<Product> items = new ArrayList<Product>();
+
+        for (int i = 0; i < 2; i++){
+            int siteIdx = rand.nextInt(siteList.size());
+            int prodIdx = rand.nextInt(2);
+
+            StorageReference gsReference = storage.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getStorageRef());
+
+            items.add(new Product(
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getName(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getName(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getIntroduction(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getStorageRef(),
+                    appState.getMeaningOutInfo().get(siteList.get(siteIdx)).getProducts().get(prodIdx).getProductUrl(),
+                    gsReference));
+        }
+
+        recyclerView_about_ve.setAdapter(adapter);
+        adapter.setItems(items);
         adapter.setOnItemClickListener(new OnProductItemClickListener() {
             @Override
             public void onItemClick(ProductAdapter.ViewHolder holder, View view, int position) {

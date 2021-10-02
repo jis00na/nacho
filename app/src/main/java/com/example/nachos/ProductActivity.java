@@ -66,6 +66,7 @@ public class ProductActivity extends AppCompatActivity{
 
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView_up.setLayoutManager(layoutManager);
+
         //recyclerView_ve.setLayoutManager(layoutManager);
         //recyclerView_ft.setLayoutManager(layoutManager);
 //        recyclerView_do.setLayoutManager(layoutManager);
@@ -87,14 +88,6 @@ public class ProductActivity extends AppCompatActivity{
         ArrayList<Product> items = new ArrayList<Product>();
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference gsReference = storage.getReferenceFromUrl(baseUrl + appState.getMeaningOutInfo().get("윙블링").getProducts().get(0).getStorageRef());
-
-//        adapter.addItem(new Product(
-//                appState.getMeaningOutInfo().get("윙블링").getName(),
-//                appState.getMeaningOutInfo().get("윙블링").getProducts().get(0).getName(),
-//                appState.getMeaningOutInfo().get("윙블링").getProducts().get(0).getIntroduction(),
-//                appState.getMeaningOutInfo().get("윙블링").getProducts().get(0).getStorageRef(),
-//                appState.getMeaningOutInfo().get("윙블링").getProducts().get(0).getProductUrl(),
-//                gsReference));
 
         items.add(new Product(
                 appState.getMeaningOutInfo().get("윙블링").getName(),
@@ -132,6 +125,7 @@ public class ProductActivity extends AppCompatActivity{
 
         recyclerView_up.setAdapter(adapter);
         adapter.setItems(items);
+
         adapter.setOnItemClickListener(new OnProductItemClickListener() {
             @Override
             public void onItemClick(ProductAdapter.ViewHolder holder, View view, int position) {
