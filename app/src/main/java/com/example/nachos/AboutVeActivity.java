@@ -52,10 +52,10 @@ public class AboutVeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_ve);
         appState = (ApplicationState) getApplication();
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_aboutve);
         GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView.setLayoutManager(layoutManager);
-        final ProductAdapter adapter = new ProductAdapter();
+        //final ProductAboutAdapter adapter = new ProductAboutAdapter();
 
         Button title_back, title_prof; // 상단 타이틀
         Button home, cate, prod, stor; // 상단 탑뷰
@@ -264,17 +264,20 @@ public class AboutVeActivity extends AppCompatActivity {
 //        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
 //        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
 //        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
-//        adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
+          //adapter.addItem(new Product("사이트", "친환경주방선물세트" , "우리 가족과 지구의 건강을 주방에 선물", R.drawable.aboutve));
 
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new OnProductItemClickListener() {
-            @Override
-            public void onItemClick(ProductAdapter.ViewHolder holder, View view, int position) {
-                clickCount();
-                Product item = adapter.getItem(position);
-                //Toast.makeText(getApplicationContext(), "이름 : " + item.getName() + "\n 가격 : " + item.getCost() +"\n 설명 : " + item.getNotification(),Toast.LENGTH_LONG).show();
-            }
-        });
+//
+//        recyclerView.setAdapter(adapter);
+//        adapter.setOnItemClickListener(new OnProductItemClickListener() {
+//            @Override
+//            public void onItemClick(ProductAdapter.ViewHolder holder, View view, int position) {
+//                clickCount();
+//                Product item = adapter.getItem(position);
+//                //Toast.makeText(getApplicationContext(), "이름 : " + item.getName() + "\n 가격 : " + item.getCost() +"\n 설명 : " + item.getNotification(),Toast.LENGTH_LONG).show();
+//
+//            }
+//
+//        });
 
 
     }
