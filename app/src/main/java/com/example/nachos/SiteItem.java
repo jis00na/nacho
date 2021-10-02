@@ -3,9 +3,11 @@ package com.example.nachos;
 
 import android.net.Uri;
 import android.view.View;
+
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,6 +51,12 @@ public class SiteItem {
     //private ApplicationState appState;
     //StorageReference storageRef = storage.getReference(appState.getMeaningOutInfo().get("119레오").getDownloadUrl());
 
+
+
+    //FirebaseStorage storage = FirebaseStorage.getInstance();
+    //private ApplicationState appState;
+    //StorageReference storageRef = storage.getReference(appState.getMeaningOutInfo().get("119레오").getDownloadUrl());
+
     //생성
     /*
     public SiteItem(String site, String category, int resId) {
@@ -56,6 +64,7 @@ public class SiteItem {
         this.category = category;
         this.resId = resId;
     }*/
+
     public SiteItem(String site, String category, String logo, String url, StorageReference ref) {
         this.site = site;
         this.category = category;

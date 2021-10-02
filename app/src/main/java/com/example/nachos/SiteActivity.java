@@ -835,7 +835,6 @@ public class SiteActivity extends AppCompatActivity {
         setListViewHeight(listView_ve);
 
 
-
         // 상단 타이틀 버튼 클릭 시 이벤트
         title_back.setOnClickListener(new View.OnClickListener() {
             @Override

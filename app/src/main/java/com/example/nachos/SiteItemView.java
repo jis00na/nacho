@@ -1,5 +1,6 @@
 package com.example.nachos;
 import android.content.Context;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -8,8 +9,12 @@ import android.widget.TextView;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 
-import com.bumptech.glide.Glide;
+
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.StorageReference;
+import com.bumptech.glide.Glide;
+
+
 
 public class SiteItemView extends LinearLayout {
 
@@ -46,6 +51,7 @@ public class SiteItemView extends LinearLayout {
     public void setCategory(String category){
         textView2.setText(category);
     }
+
     public void setImage(StorageReference ref){
         // Reference 까지 인자로?
         // view == ?

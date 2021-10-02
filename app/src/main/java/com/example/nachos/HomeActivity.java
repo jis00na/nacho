@@ -12,7 +12,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -176,6 +177,7 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("counter_alone", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         counter_h = prefs.getInt("counter_h", 0);
+
         /*
         Button btn = findViewById(R.id.testBtn);
         ImageView testImgView = (ImageView) findViewById(R.id.testImgView);
@@ -665,10 +667,35 @@ public class HomeActivity extends AppCompatActivity {
         return json;
     }
 
+    // 여기  storage에서 이미지 가져오는 코드
+
+
     private void getImageFromStorage(){
+
+
+
         Button btn = findViewById(R.id.testBtn);
         testImgView = (ImageView) findViewById(R.id.testImgView);
-        FirebaseStorage storage = FirebaseStorage.getInstance(); // FirebaseStorage 인스턴스 생성
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+        StorageReference pathReference = storageReference.child("공정무역");
+        StorageReference submitProfile = storageReference.child("공정무역/공기_로고.png");
+        submitProfile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(HomeActivity.this).load(uri).into(testImgView);
+                System.out.println("uri"+uri);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("uri");
+            }
+        });
+
+
+
+
         System.out.println(appState.getMeaningOutInfo().get("119레오").getLogoRef());
 
         StorageReference storageRef = storage.getReference(); // 스토리지 공간을 참조해서 이미지를 가져옴 (로고)
@@ -682,6 +709,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Glide.with(view).load(gsReference).override(1000).into(testImgView); // Glide를 사용하여 이미지 로드
+
 //                storageRef.getDownloadUrl().addOnCompleteListener(task -> {
 //                    if (task.isSuccessful()){
 //                        Glide.with(getApplicationContext() /* context */)

@@ -57,6 +57,12 @@ public class AboutVeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_ve);
         appState = (ApplicationState) getApplication();
 
+
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_about_ve);
+        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        recyclerView.setLayoutManager(layoutManager);
+        //final ProductAboutAdapter adapter = new ProductAboutAdapter();
+
         Button title_back, title_prof; // 상단 타이틀
         Button home, cate, prod, stor; // 상단 탑뷰
         Button hash_up, hash_ve, hash_ft, hash_do, hash_aw, hash_pf; // hashtag들
@@ -259,7 +265,7 @@ public class AboutVeActivity extends AppCompatActivity {
         });
 
         RecyclerView recyclerView_about_ve = findViewById(R.id.recyclerView_about_ve);
-        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        //GridLayoutManager layoutManager = new GridLayoutManager(this,2);
         recyclerView_about_ve.setLayoutManager(layoutManager);
         final ProductAdapter adapter = new ProductAdapter();
 
@@ -268,6 +274,7 @@ public class AboutVeActivity extends AppCompatActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
         ArrayList<Product> items = new ArrayList<Product>();
+
 
         for (int i = 0; i < 2; i++){
             int siteIdx = rand.nextInt(siteList.size());
