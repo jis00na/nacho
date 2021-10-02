@@ -550,6 +550,13 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public void onBackPressed()
+//    {
+//        //super.onBackPressed();
+//
+//    }
+
     public void initializeData() //이미지를 저장함 배열에
     {
         imageList = new ArrayList();
